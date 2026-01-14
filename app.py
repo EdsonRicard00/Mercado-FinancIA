@@ -7,99 +7,123 @@ from GoogleNews import GoogleNews
 import pandas as pd
 
 # --- 1. CONFIGURAÇÃO DA PÁGINA ---
-st.set_page_config(layout="wide", page_title="Mercado-FinancIA | Luxury", page_icon="💎")
+st.set_page_config(layout="wide", page_title="Financia | Premium", page_icon="💎")
 
-# --- 2. CSS "LUXURY METALS" ---
+# --- 2. CSS "DARK LUXURY METALS" ---
 st.markdown("""
 <style>
     /* FONTE E RESET */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+    
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
-        color: #1d1d1f;
     }
-    .stApp { background-color: #fbfbfd; } /* Fundo claro para destacar os metais */
 
-    /* --- NOVAS CLASSES: METAIS PRECIOSOS --- */
+    /* FUNDO PRETO PROFUNDO (DARK MODE) */
+    .stApp {
+        background-color: #000000;
+        background-image: radial-gradient(circle at 50% 0%, #1c1c1c 0%, #000000 80%);
+        color: #e0e0e0; /* Texto claro padrão */
+    }
 
-    /* ESTILO PRATA/PLATINA (Escovado) */
+    /* --- NOVAS CLASSES: METAIS PRECIOSOS NO ESCURO --- */
+
+    /* ESTILO PRATA (Brilha no escuro) */
     .silver-card {
-        /* Degradê diagonal suave para simular reflexo metálico */
-        background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 50%, #d9dfe6 100%);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        border-radius: 20px;
+        background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #a0a0a0 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
         padding: 25px;
-        /* Sombra dupla: uma externa suave e uma interna branca para brilho nas bordas */
-        box-shadow: 
-            0 10px 30px rgba(0,0,0,0.08),
-            inset 0 0 15px rgba(255,255,255,0.9);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Sombra externa escura + brilho interno */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.8);
+        color: #1a1a1a !important; /* Texto ESCURO para ler no fundo PRATA */
+        transition: transform 0.3s ease;
     }
     .silver-card:hover {
         transform: translateY(-5px);
-        box-shadow: 
-            0 15px 40px rgba(0,0,0,0.12),
-            inset 0 0 15px rgba(255,255,255,1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); /* Brilho ao passar o mouse */
     }
-
-    /* ESTILO OURO (Dourado Rico) */
+    
+    /* ESTILO OURO (Riqueza no escuro) */
     .gold-card {
-        /* Degradê quente de ouro */
-        background: linear-gradient(135deg, #E6C35C 0%, #F7E49A 50%, #BD952D 100%);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 20px;
+        background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 40%, #b38728 80%, #fbf5b7 100%);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 15px;
         padding: 25px;
-        /* Sombra com tom dourado */
-        box-shadow: 
-            0 10px 30px rgba(189, 149, 45, 0.3),
-            inset 0 0 20px rgba(255,255,255,0.4);
-        color: #4a3b10 !important; /* Texto marrom escuro para contraste no ouro */
-        transition: transform 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,215,0,0.5);
+        color: #3b2a05 !important; /* Texto MARROM ESCURO para ler no fundo OURO */
         text-align: center;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        transition: transform 0.3s ease;
     }
     .gold-card:hover {
         transform: translateY(-5px);
-         box-shadow: 0 15px 40px rgba(189, 149, 45, 0.4);
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); /* Brilho Dourado */
     }
 
-
-    /* --- APLICAÇÃO NOS ELEMENTOS NATIVOS --- */
-    
-    /* Hero Section */
+    /* --- HERO SECTION --- */
     .hero-title {
-        font-size: 56px; font-weight: 600; letter-spacing: -0.02em;
-        background: linear-gradient(180deg, #1d1d1f 0%, #4a4a4a 100%);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        font-family: 'Playfair Display', serif;
+        font-size: 60px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        /* Texto Gradiente Dourado/Branco */
+        background: linear-gradient(to right, #ffffff, #d4af37, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
     }
-    .hero-subtitle { font-size: 24px; color: #86868b; font-weight: 400; }
+    .hero-subtitle {
+        font-size: 18px;
+        color: #b0b0b0;
+        font-weight: 300;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+        border-top: 1px solid #333;
+        padding-top: 20px;
+    }
 
-    /* Sidebar Minimalista */
-    [data-testid="stSidebar"] { background-color: #f5f5f7; border-right: 1px solid rgba(0,0,0,0.05); }
-    
-    /* Métricas Nativas (Preço) -> Transformando em Prata */
+    /* --- SIDEBAR (Dark Mode) --- */
+    [data-testid="stSidebar"] {
+        background-color: #0a0a0a; /* Quase preto */
+        border-right: 1px solid #222;
+    }
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+        color: #d4af37 !important; /* Títulos dourados */
+    }
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] label {
+        color: #cccccc !important;
+    }
+
+    /* --- METRIC CARDS (Estilo Prata Escovado) --- */
     div[data-testid="stMetric"] {
-        background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 50%, #d9dfe6 100%);
-        border-radius: 20px;
-        padding: 25px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 0 15px rgba(255,255,255,0.9);
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+        border: 1px solid #444;
+        border-left: 5px solid #d4af37; /* Detalhe dourado */
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
-    div[data-testid="stMetricLabel"] { color: #6e6e73; }
-    div[data-testid="stMetricValue"] { color: #1d1d1f; font-weight: 600; }
+    div[data-testid="stMetricLabel"] { color: #888 !important; }
+    div[data-testid="stMetricValue"] { color: #fff !important; }
 
-    /* Inputs */
-    .stSelectbox > div > div { background-color: #ffffff !important; border-radius: 12px; }
-    .stSlider > div > div > div > div { background-color: #BD952D !important; } /* Slider Dourado */
+    /* --- INPUTS --- */
+    .stSelectbox > div > div {
+        background-color: #111 !important;
+        color: white !important;
+        border: 1px solid #333;
+    }
+    .stSlider > div > div > div > div { background-color: #d4af37 !important; }
 
     /* CTA Final */
     .cta-section {
-        /* Um toque sutil de prata no fundo final */
-        background: linear-gradient(to bottom, #fbfbfd, #eaeaee);
-        padding: 80px 20px; margin-top: 60px; border-radius: 30px; text-align: center;
+        background: linear-gradient(to bottom, #111, #000);
+        padding: 80px 20px; margin-top: 60px; border-radius: 30px; 
+        text-align: center; border: 1px solid #222;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -145,53 +169,56 @@ def analyze_sentiment(news_list):
 
 # --- 4. LAYOUT PRINCIPAL ---
 
-# HERO
+# HERO SECTION (O Novo Texto)
 st.markdown("""
-<div style="text-align: center; padding: 60px 20px;">
-    <div class="hero-title">Inteligência Financeira.<br>Padrão Ouro.</div>
-    <div class="hero-subtitle">Uma experiência desenhada para quem exige clareza absoluta e valor real.</div>
+<div style="text-align: center; padding: 70px 20px;">
+    <div class="hero-title">Financia</div>
+    <div class="hero-subtitle">
+        Uma análise rigorosa.<br>
+        Sempre estamos trabalhando incansavelmente para entregar o melhor para você.
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-# VALUE PROPOSITION (CAIXAS PRATEADAS)
+# VALUE PROPOSITION (CAIXAS PRATEADAS NO FUNDO PRETO)
 col_v1, col_v2, col_v3 = st.columns(3)
 with col_v1:
     st.markdown("""
     <div class="silver-card" style="text-align: center;">
         <span style="font-size: 30px;">⚡</span>
-        <div style="font-weight: 600; margin: 10px 0; color: #1d1d1f;">Velocidade</div>
-        <div style="color: #86868b; font-size: 14px;">Dados processados em tempo real.</div>
+        <div style="font-weight: 600; margin: 10px 0;">Velocidade</div>
+        <div style="font-size: 14px; opacity: 0.8;">Dados processados em milissegundos.</div>
     </div>
     """, unsafe_allow_html=True)
 with col_v2:
     st.markdown("""
     <div class="silver-card" style="text-align: center;">
-        <span style="font-size: 30px;">🔒</span>
-        <div style="font-weight: 600; margin: 10px 0; color: #1d1d1f;">Precisão</div>
-        <div style="color: #86868b; font-size: 14px;">Algoritmos de IA refinados.</div>
+        <span style="font-size: 30px;">🎯</span>
+        <div style="font-weight: 600; margin: 10px 0;">Rigor</div>
+        <div style="font-size: 14px; opacity: 0.8;">Análise detalhada e sem ruídos.</div>
     </div>
     """, unsafe_allow_html=True)
 with col_v3:
     st.markdown("""
     <div class="silver-card" style="text-align: center;">
         <span style="font-size: 30px;">💎</span>
-        <div style="font-weight: 600; margin: 10px 0; color: #1d1d1f;">Exclusividade</div>
-        <div style="color: #86868b; font-size: 14px;">Design premium para decisões premium.</div>
+        <div style="font-weight: 600; margin: 10px 0;">Excelência</div>
+        <div style="font-size: 14px; opacity: 0.8;">O melhor da tecnologia para você.</div>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 
-# SIDEBAR
-st.sidebar.markdown("### Seleção")
+# SIDEBAR (Escura e Elegante)
+st.sidebar.markdown("### Seleção de Ativos")
 selected_asset_name = st.sidebar.selectbox("Ativo", options=list(ASSET_DB.keys()))
 ticker_input = ASSET_DB[selected_asset_name]
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
-st.sidebar.markdown("### Período")
+st.sidebar.markdown("### Horizonte")
 time_option = st.sidebar.select_slider("", options=["1M", "6M", "1A", "5A", "Max"], value="1A")
 time_map = {"1M": "1mo", "6M": "6mo", "1A": "1y", "5A": "5y", "Max": "max"}
 st.sidebar.markdown("---")
-st.sidebar.markdown("""<div style="color: #86868b; font-size: 12px; text-align: center;">Designed by Edson Junior<br><span style="opacity: 0.5;">Luxury FinTech Interface</span></div>""", unsafe_allow_html=True)
+st.sidebar.markdown("""<div style="color: #666; font-size: 12px; text-align: center;">Financia Premium System<br>v3.0 Dark Edition</div>""", unsafe_allow_html=True)
 
 # APP LOGIC
 if ticker_input:
@@ -201,7 +228,7 @@ if ticker_input:
     news = get_real_news(clean_name)
 
     if history is not None and not history.empty:
-        st.markdown(f"<h3 style='text-align:center; font-weight:600; margin-bottom:30px; color:#1d1d1f;'>Análise: {clean_name}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='text-align:center; font-weight:300; margin-bottom:30px; color:#fff;'>Análise: <span style='color:#d4af37; font-weight:600;'>{clean_name}</span></h3>", unsafe_allow_html=True)
         
         current_price = history['Close'].iloc[-1]
         delta = current_price - history['Close'].iloc[-2]
@@ -210,59 +237,64 @@ if ticker_input:
         c1, c2 = st.columns([1.5, 1])
         
         with c1:
-            # O card de preço será PRATA (definido no CSS global do stMetric)
             st.metric("Cotação Atual", f"{currency} {current_price:.2f}", f"{delta:.2f}")
         
         with c2:
             score, sentiment_text = analyze_sentiment(news)
-            # Cores de texto ajustadas para contrastar com o DOURADO
             color_sent = "#214e2b" if score > 0.05 else "#7a221e" if score < -0.05 else "#4a3b10"
             
-            # O card de Sentimento será DOURADO
+            # CARD DE OURO (Destaca-se muito no fundo preto)
             st.markdown(f"""
             <div class="gold-card">
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;">Sentimento IA</div>
-                <div style="font-size: 24px; font-weight: 700; color: {color_sent}; margin-top: 5px;">{sentiment_text}</div>
+                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">Veredito da IA</div>
+                <div style="font-size: 24px; font-weight: 800; color: {color_sent}; margin-top: 5px;">{sentiment_text}</div>
             </div>
             """, unsafe_allow_html=True)
 
-        # GRÁFICO
+        # GRÁFICO (Dark Mode Nativo)
         st.markdown("<br>", unsafe_allow_html=True)
         fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1, row_heights=[0.75, 0.25])
-        # Cores do gráfico ajustadas para tons mais ricos
-        fig.add_trace(go.Candlestick(x=history.index, open=history['Open'], high=history['High'], low=history['Low'], close=history['Close'], name="Preço", increasing_line_color='#2ecc71', decreasing_line_color='#e74c3c', increasing_fillcolor='rgba(46, 204, 113, 0.1)', decreasing_fillcolor='rgba(231, 76, 60, 0.1)'), row=1, col=1)
-        fig.add_trace(go.Bar(x=history.index, y=history['Volume'], name="Volume", marker_color='#bdc3c7', opacity=0.4), row=2, col=1)
-        fig.update_layout(template='plotly_white', paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=550, xaxis_rangeslider_visible=False, showlegend=False, margin=dict(l=20, r=20, t=20, b=20), hovermode="x unified")
-        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='rgba(0,0,0,0.05)')
-        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='rgba(0,0,0,0.05)')
+        
+        # Neon Candles
+        fig.add_trace(go.Candlestick(x=history.index, open=history['Open'], high=history['High'], low=history['Low'], close=history['Close'], name="Preço", increasing_line_color='#00ff88', decreasing_line_color='#ff4b4b'), row=1, col=1)
+        fig.add_trace(go.Bar(x=history.index, y=history['Volume'], name="Volume", marker_color='#ffffff', opacity=0.3), row=2, col=1)
+        
+        fig.update_layout(
+            template='plotly_dark', # Volta para o tema escuro do gráfico
+            paper_bgcolor='rgba(0,0,0,0)', 
+            plot_bgcolor='rgba(0,0,0,0)', 
+            height=550, 
+            xaxis_rangeslider_visible=False, 
+            showlegend=False, 
+            margin=dict(l=20, r=20, t=20, b=20),
+            font=dict(color="#e0e0e0")
+        )
+        fig.update_xaxes(gridcolor='rgba(255,255,255,0.1)')
+        fig.update_yaxes(gridcolor='rgba(255,255,255,0.1)')
         st.plotly_chart(fig, use_container_width=True)
 
-        # NOTÍCIAS (CAIXAS PRATEADAS EM LISTA)
+        # NOTÍCIAS (Prata sobre Preto)
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h4 style='font-weight: 600; color: #1d1d1f; margin-bottom: 20px;'>Contexto Global</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-weight: 600; color: #fff; margin-bottom: 20px;'>Radar de Notícias</h4>", unsafe_allow_html=True)
         
         if news:
             for n in news[:3]:
-                # Cada notícia é um card prateado
                 st.markdown(f"""
-                <div class="silver-card" style="padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="silver-card" style="padding: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <a href="{n['link']}" target="_blank" style="text-decoration: none; color: #1d1d1f; font-weight: 600; font-size: 16px;">{n['title']}</a>
-                        <div style="font-size: 13px; color: #86868b; margin-top: 5px;">{n.get('date', 'Recentemente')} • Fonte Confiável</div>
+                        <a href="{n['link']}" target="_blank" style="text-decoration: none; color: #1a1a1a; font-weight: 700; font-size: 16px;">{n['title']}</a>
+                        <div style="font-size: 12px; color: #444; margin-top: 5px;">{n.get('date', 'Agora')} • Financia News Feed</div>
                     </div>
-                    <span style="font-size: 20px; color: #d9dfe6;">↗</span>
+                    <span style="font-size: 18px; color: #888;">➤</span>
                 </div>
                 """, unsafe_allow_html=True)
         else:
-            st.markdown("<div style='color:#86868b; font-style:italic;'>Sem ruído no momento.</div>", unsafe_allow_html=True)
-
-    else:
-        st.warning("Dados indisponíveis temporariamente.")
+            st.write("Sem dados.")
 
 # CTA FINAL
 st.markdown("""
 <div class="cta-section">
-    <div style="font-size: 32px; font-weight: 600; color: #1d1d1f; margin-bottom: 20px;">O padrão ouro da sua carteira.</div>
-    <div style="color: #86868b; font-size: 18px;">Mercado-FinancIA Luxury.</div>
+    <div style="font-size: 30px; font-weight: 600; color: #fff; margin-bottom: 15px;">Financia.</div>
+    <div style="color: #888; font-size: 16px;">O padrão ouro da sua carteira de investimentos.</div>
 </div>
 """, unsafe_allow_html=True)
