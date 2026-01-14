@@ -7,142 +7,164 @@ from GoogleNews import GoogleNews
 import pandas as pd
 
 # --- 1. CONFIGURAÇÃO DA PÁGINA ---
-st.set_page_config(layout="wide", page_title="Mercado-FinancIA | Premium", page_icon="💎")
+st.set_page_config(layout="wide", page_title="Mercado-FinancIA", page_icon="🍏")
 
-# --- 2. CSS AVANÇADO (DESIGN SYSTEM PREMIUM) ---
+# --- 2. CSS "APPLE DESIGN SYSTEM" ---
 st.markdown("""
 <style>
-    /* --- RESET & TIPOGRAFIA --- */
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
+    /* RESET E FONTE DO SISTEMA (San Francisco / Helvetica) */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    
+    html, body, [class*="css"] {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: #1d1d1f; /* Cinza Apple Quase Preto */
+    }
 
-    /* Fundo Global Animado (Subtil) */
+    /* FUNDO GERAL (Off-White Apple) */
     .stApp {
-        background: radial-gradient(circle at 50% 10%, #1a1a1a 0%, #050505 90%);
-        color: #f0f0f0;
-        font-family: 'Inter', sans-serif;
+        background-color: #fbfbfd;
     }
 
-    /* --- HERO SECTION (O Título Principal) --- */
-    .hero-container {
+    /* --- HERO SECTION --- */
+    .hero-section {
         text-align: center;
-        padding: 60px 20px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-        backdrop-filter: blur(20px);
-        border-radius: 30px;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        margin-bottom: 50px;
-        animation: fadeIn 1.5s ease-in-out;
+        padding: 80px 20px 60px 20px;
+        animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
+    
     .hero-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 4em;
-        background: linear-gradient(to right, #ffffff, #d4af37, #ffffff);
+        font-size: 56px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        background: linear-gradient(180deg, #1d1d1f 0%, #4a4a4a 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 10px;
-        letter-spacing: -1px;
+        margin-bottom: 20px;
     }
 
     .hero-subtitle {
-        color: #a0a0a0;
-        font-size: 1.2em;
-        font-weight: 300;
-        max-width: 600px;
+        font-size: 24px;
+        color: #86868b;
+        font-weight: 400;
+        max-width: 700px;
+        margin: 0 auto 40px auto;
+        line-height: 1.4;
+    }
+
+    /* --- FEATURE CARDS (Seção de Valor) --- */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 40px 0;
+        max-width: 1000px;
         margin: 0 auto;
     }
+    .feature-item {
+        text-align: center;
+    }
+    .feature-icon { font-size: 30px; margin-bottom: 15px; display: block; }
+    .feature-head { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: #1d1d1f; }
+    .feature-text { font-size: 15px; color: #86868b; line-height: 1.5; }
 
-    /* --- SIDEBAR (Menu Lateral) --- */
+    /* --- SIDEBAR (Minimalista) --- */
     [data-testid="stSidebar"] {
-        background-color: rgba(10, 10, 10, 0.95);
-        border-right: 1px solid #333;
+        background-color: #f5f5f7; /* Cinza claro Apple */
+        border-right: 1px solid rgba(0,0,0,0.05);
     }
     [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2 {
-        color: #d4af37 !important; /* Dourado */
-        font-family: 'Playfair Display', serif;
+        color: #1d1d1f !important;
+        font-weight: 500;
+        letter-spacing: -0.01em;
     }
 
-    /* --- CARDS DE PREÇO (Métricas) --- */
+    /* --- METRIC CARDS (Estilo Widget iOS) --- */
     div[data-testid="stMetric"] {
-        background: linear-gradient(145deg, #1e1e1e, #161616);
-        border: 1px solid #333;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease, border-color 0.3s;
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.04); /* Sombra ultra suave */
+        border: 1px solid rgba(0,0,0,0.02);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     div[data-testid="stMetric"]:hover {
-        transform: translateY(-5px);
-        border-color: #d4af37;
+        transform: scale(1.02);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
     }
-    div[data-testid="stMetricLabel"] { color: #888 !important; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
-    div[data-testid="stMetricValue"] { color: #fff !important; font-size: 2.2em !important; font-family: 'Playfair Display', serif; }
+    div[data-testid="stMetricLabel"] { font-size: 14px; color: #86868b; font-weight: 500; }
+    div[data-testid="stMetricValue"] { font-size: 32px; color: #1d1d1f; font-weight: 600; letter-spacing: -1px; }
 
-    /* --- SENTIMENT CARD (IA) --- */
-    .sentiment-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 15px;
+    /* --- SENTIMENT CARD (Glass) --- */
+    .sentiment-box {
+        background: #ffffff;
+        border-radius: 20px;
         padding: 25px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.04);
         text-align: center;
-        backdrop-filter: blur(10px);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    .sentiment-label { color: #888; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8em; }
-    .sentiment-value { font-size: 1.8em; font-weight: 600; margin-top: 10px; }
 
-    /* --- NOTÍCIAS (News Cards) --- */
-    .news-card {
-        background-color: #111;
-        border-left: 3px solid #333;
-        padding: 20px;
-        margin-bottom: 15px;
-        border-radius: 0 10px 10px 0;
-        transition: all 0.3s ease;
+    /* --- NOTÍCIAS (Clean List) --- */
+    .news-item {
+        padding: 20px 0;
+        border-bottom: 1px solid #e5e5e5;
+        transition: opacity 0.3s;
     }
-    .news-card:hover {
-        background-color: #1a1a1a;
-        border-left: 3px solid #d4af37; /* Destaque Dourado ao passar o mouse */
-        padding-left: 30px; /* Animação de movimento */
-        cursor: pointer;
+    .news-item:hover { opacity: 0.7; }
+    .news-link {
+        text-decoration: none;
+        color: #1d1d1f;
+        font-weight: 500;
+        font-size: 18px;
+        letter-spacing: -0.01em;
     }
-    .news-date { color: #555; font-size: 0.8em; margin-bottom: 5px; }
-    .news-link { text-decoration: none; color: #e0e0e0; font-size: 1.1em; font-weight: 500; display: block;}
-    .news-link:hover { color: #d4af37; }
-
-    /* --- INPUTS & SLIDERS (Customização dos controles) --- */
-    .stSelectbox > div > div { background-color: #1a1a1a !important; color: white !important; border-color: #333; }
-    .stSlider > div > div > div > div { background-color: #d4af37 !important; }
-
-    /* Animação de Entrada */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
+    .news-meta {
+        font-size: 13px;
+        color: #86868b;
+        margin-top: 5px;
+    }
+    
+    /* --- INPUTS --- */
+    .stSelectbox > div > div {
+        background-color: #ffffff !important;
+        color: #1d1d1f !important;
+        border: 1px solid #d2d2d7;
+        border-radius: 12px;
+    }
+    
+    /* --- ANIMAÇÕES --- */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
     }
+    
+    /* CTA FINAL */
+    .cta-section {
+        text-align: center;
+        padding: 80px 20px;
+        background: #ffffff;
+        margin-top: 60px;
+        border-radius: 30px;
+    }
+    .cta-text { font-size: 32px; font-weight: 600; color: #1d1d1f; margin-bottom: 20px; }
+    .cta-sub { color: #86868b; font-size: 18px; }
+
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. BANCO DE DADOS DE ATIVOS ---
+# --- 3. DADOS (Mantendo a lógica robusta) ---
 ASSET_DB = {
-    "🟡 Ouro (Gold Futures)": "GC=F", "⚪ Prata (Silver Futures)": "SI=F", "₿ Bitcoin (USD)": "BTC-USD",
-    "🛢️ Petróleo Brent": "BZ=F", "🇺🇸 NVIDIA": "NVDA", "🇺🇸 Apple": "AAPL", "🇺🇸 Microsoft": "MSFT",
-    "🇺🇸 Alphabet (Google)": "GOOGL", "🇺🇸 Amazon": "AMZN", "🇺🇸 Meta": "META", "🇺🇸 Tesla": "TSLA",
-    "🇺🇸 Berkshire Hathaway": "BRK-B", "🇺🇸 JPMorgan": "JPM", "🇺🇸 Visa": "V", "🇺🇸 Johnson & Johnson": "JNJ",
-    "🇺🇸 Walmart": "WMT", "🇺🇸 ExxonMobil": "XOM", "🇺🇸 Home Depot": "HD", "🇺🇸 Broadcom": "AVGO",
-    "🇹🇼 TSMC": "TSM", "🇨🇳 Tencent": "TCEHY", "🇰🇷 Samsung": "SSNLF", "🇨🇭 Nestlé": "NSRGY",
-    "🇯🇵 Toyota": "TM", "🇸🇦 Saudi Aramco": "2222.SR", "🇬🇧 Shell": "SHEL",
-    "🇧🇷 Petrobras (PETR4)": "PETR4.SA", "🇧🇷 Vale (VALE3)": "VALE3.SA", "🇧🇷 Itaú (ITUB4)": "ITUB4.SA",
-    "🇧🇷 Bradesco (BBDC4)": "BBDC4.SA", "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA", "🇧🇷 Nubank (NU)": "NU",
-    "🇧🇷 Ambev (ABEV3)": "ABEV3.SA", "🇧🇷 B3 (B3SA3)": "B3SA3.SA", "🇧🇷 BTG Pactual (BPAC11)": "BPAC11.SA",
-    "🇧🇷 Weg (WEGE3)": "WEGE3.SA", "🇧🇷 Suzano (SUZB3)": "SUZB3.SA", "🇧🇷 Gerdau (GGBR4)": "GGBR4.SA",
-    "🇧🇷 Localiza (RENT3)": "RENT3.SA", "🇧🇷 JBS (JBSS3)": "JBSS3.SA", "🇧🇷 Magalu (MGLU3)": "MGLU3.SA",
-    "🇧🇷 Sabesp (SBSP3)": "SBSP3.SA", "🇧🇷 Klabin (KLBN11)": "KLBN11.SA", "🇧🇷 Embraer (EMBR3)": "EMBR3.SA",
-    "🇧🇷 Raízen (RAIZ4)": "RAIZ4.SA", "🇧🇷 Engie (ENGI11)": "ENGI11.SA", "🇧🇷 Hapvida (HAPV3)": "HAPV3.SA",
-    "🇧🇷 Cogna (COGN3)": "COGN3.SA", "🇧🇷 MRV (MRVE3)": "MRVE3.SA", "🇧🇷 Natura (NTCO3)": "NTCO3.SA",
-    "🇧🇷 XP Inc.": "XP"
+    "Apple Inc.": "AAPL", "Microsoft": "MSFT", "NVIDIA": "NVDA", "Alphabet": "GOOGL",
+    "Amazon": "AMZN", "Tesla": "TSLA", "Meta": "META", "Bitcoin": "BTC-USD",
+    "Gold": "GC=F", "Petrobras": "PETR4.SA", "Vale": "VALE3.SA", "Itaú": "ITUB4.SA",
+    "Ambev": "ABEV3.SA", "Nubank": "NU", "Weg": "WEGE3.SA"
 }
 
-# --- 4. FUNÇÕES DE BACKEND (Cacheado para Performance) ---
 @st.cache_data(ttl=3600)
 def get_stock_data(ticker, period_code):
     try:
@@ -156,135 +178,179 @@ def get_stock_data(ticker, period_code):
 def get_real_news(term):
     try:
         googlenews = GoogleNews(period='7d', lang='en') 
-        googlenews.search(f"{term} market")
+        googlenews.search(f"{term} finance")
         return googlenews.result()
     except: return []
 
 def analyze_sentiment(news_list):
-    if not news_list: return 0, "Aguardando dados..."
+    if not news_list: return 0, "Analisando..."
     polarity_sum, count = 0, 0
     for n in news_list[:5]:
-        text = n.get('title', '') + " " + n.get('desc', '')
-        if text.strip():
+        text = n.get('title', '')
+        if text:
             analysis = TextBlob(text)
             polarity_sum += analysis.sentiment.polarity
             count += 1
     avg = polarity_sum / count if count > 0 else 0
-    if avg > 0.05: return avg, "OTIMISTA"
-    elif avg < -0.05: return avg, "PESSIMISTA"
-    return avg, "NEUTRO"
+    # Lógica refinada
+    if avg > 0.1: return avg, "Tendência de Alta"
+    elif avg < -0.1: return avg, "Tendência de Baixa"
+    return avg, "Estabilidade"
 
-# --- 5. INTERFACE DO USUÁRIO (UX/UI) ---
+# --- 4. LAYOUT PRINCIPAL (ESTRUTURA) ---
 
-# SIDEBAR (Configurações)
-st.sidebar.markdown("## ⚙️ Painel de Controle")
-selected_asset_name = st.sidebar.selectbox("Selecione o Ativo:", options=list(ASSET_DB.keys()))
+# HERO SECTION (O Impacto Visual)
+st.markdown("""
+<div class="hero-section">
+    <div class="hero-title">Inteligência Financeira.<br>Elevada à Perfeição.</div>
+    <div class="hero-subtitle">Uma experiência desenhada para quem exige clareza absoluta em um mundo de ruído.</div>
+</div>
+""", unsafe_allow_html=True)
+
+# VALUE PROPOSITION (Grid Minimalista)
+col_v1, col_v2, col_v3 = st.columns(3)
+with col_v1:
+    st.markdown("""
+    <div class="feature-item">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-head">Velocidade</div>
+        <div class="feature-text">Dados em tempo real processados instantaneamente.</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col_v2:
+    st.markdown("""
+    <div class="feature-item">
+        <span class="feature-icon">🔒</span>
+        <div class="feature-head">Precisão</div>
+        <div class="feature-text">Algoritmos de IA que filtram o essencial.</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col_v3:
+    st.markdown("""
+    <div class="feature-item">
+        <span class="feature-icon">💎</span>
+        <div class="feature-head">Design</div>
+        <div class="feature-text">Visualização limpa para decisões complexas.</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br><br>", unsafe_allow_html=True)
+
+# --- SIDEBAR (Controles Discretos) ---
+st.sidebar.markdown("### Seleção")
+selected_asset_name = st.sidebar.selectbox("Ativo", options=list(ASSET_DB.keys()))
 ticker_input = ASSET_DB[selected_asset_name]
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
-st.sidebar.markdown("### 📅 Horizonte Temporal")
-time_option = st.sidebar.select_slider("", options=["1 Mês", "6 Meses", "1 Ano", "5 Anos", "25 Anos (Max)"], value="1 Ano")
-time_map = {"1 Mês": "1mo", "6 Meses": "6mo", "1 Ano": "1y", "5 Anos": "5y", "25 Anos (Max)": "max"}
+st.sidebar.markdown("### Período")
+time_option = st.sidebar.select_slider("", options=["1M", "6M", "1A", "5A", "Max"], value="1A")
+time_map = {"1M": "1mo", "6M": "6mo", "1A": "1y", "5A": "5y", "Max": "max"}
 
+# ASSINATURA SIDEBAR (Minimalista)
 st.sidebar.markdown("---")
-st.sidebar.markdown("<small style='color: #666'>Mercado-FinancIA v2.0 • Powered by Python</small>", unsafe_allow_html=True)
-
-# ÁREA PRINCIPAL
-# Hero Section (HTML Puro injetado)
-st.markdown("""
-    <div class="hero-container">
-        <div class="hero-title">Mercado-FinancIA</div>
-        <div class="hero-subtitle">Inteligência Artificial aplicada à análise de tendências globais. <br> Tome decisões baseadas em dados, não em palpites.</div>
-    </div>
+st.sidebar.markdown("""
+<div style="color: #86868b; font-size: 12px; text-align: center;">
+    Designed by Edson Junior<br>
+    <span style="opacity: 0.5;">Engineering meets Art</span>
+</div>
 """, unsafe_allow_html=True)
+
+# --- APP LOGIC ---
 
 if ticker_input:
     period_yf = time_map[time_option]
-    clean_name = selected_asset_name.split(" ", 1)[1] if " " in selected_asset_name else selected_asset_name
+    clean_name = selected_asset_name
     
-    with st.spinner(f'Consultando satélites financeiros para {clean_name}...'):
-        history = get_stock_data(ticker_input, period_yf)
-        news = get_real_news(clean_name)
+    # Processamento silencioso
+    history = get_stock_data(ticker_input, period_yf)
+    news = get_real_news(clean_name)
 
     if history is not None and not history.empty:
-        # SEÇÃO 1: MÉTRICAS & SENTIMENTO
-        st.markdown(f"<h3 style='margin-bottom: 20px; color: #d4af37;'>📊 Análise de {clean_name}</h3>", unsafe_allow_html=True)
+        
+        # SEÇÃO DE DESTAQUE (Metrics)
+        st.markdown(f"<h3 style='text-align:center; font-weight:600; margin-bottom:30px; color:#1d1d1f;'>Análise: {clean_name}</h3>", unsafe_allow_html=True)
         
         current_price = history['Close'].iloc[-1]
         delta = current_price - history['Close'].iloc[-2]
         currency = "R$" if ".SA" in ticker_input else "US$"
         
-        col_metrics, col_sentiment = st.columns([1, 2])
+        c1, c2 = st.columns([1.5, 1])
         
-        with col_metrics:
+        with c1:
             st.metric("Cotação Atual", f"{currency} {current_price:.2f}", f"{delta:.2f}")
-
-        with col_sentiment:
+        
+        with c2:
             score, sentiment_text = analyze_sentiment(news)
-            color_sent = "#00ff88" if score > 0.05 else "#ff4b4b" if score < -0.05 else "#a0a0a0"
-            icon_sent = "🚀" if score > 0.05 else "⚠️" if score < -0.05 else "⚖️"
+            # Cores Apple (Verde = #34c759, Vermelho = #ff3b30)
+            color_sent = "#34c759" if score > 0.05 else "#ff3b30" if score < -0.05 else "#86868b"
             
-            # Card HTML Personalizado para o Sentimento
             st.markdown(f"""
-                <div class="sentiment-card">
-                    <div class="sentiment-label">Sentimento de Mercado (IA Analysis)</div>
-                    <div class="sentiment-value" style="color: {color_sent};">
-                        {icon_sent} {sentiment_text}
-                    </div>
-                </div>
+            <div class="sentiment-box">
+                <div style="font-size: 12px; color: #86868b; text-transform: uppercase; letter-spacing: 1px;">Sentimento IA</div>
+                <div style="font-size: 24px; font-weight: 600; color: {color_sent}; margin-top: 5px;">{sentiment_text}</div>
+            </div>
             """, unsafe_allow_html=True)
 
-        # SEÇÃO 2: GRÁFICOS INTERATIVOS
+        # GRÁFICO (Minimalista / Apple Style)
         st.markdown("<br>", unsafe_allow_html=True)
         
-        fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.05, row_heights=[0.7, 0.3])
+        fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1, row_heights=[0.75, 0.25])
         
-        # Candlestick (Preço)
+        # Candle Clean
         fig.add_trace(go.Candlestick(
             x=history.index, open=history['Open'], high=history['High'], low=history['Low'], close=history['Close'],
-            name="Preço", increasing_line_color='#00ff88', decreasing_line_color='#ff4b4b'
+            name="Preço", 
+            increasing_line_color='#34c759', # Apple Green
+            decreasing_line_color='#ff3b30', # Apple Red
+            increasing_fillcolor='rgba(52, 199, 89, 0.1)', # Preenchimento suave
+            decreasing_fillcolor='rgba(255, 59, 48, 0.1)'
         ), row=1, col=1)
         
-        # Volume (Barras)
-        colors_vol = ['#00ff88' if r['Open']-r['Close']>=0 else '#ff4b4b' for i, r in history.iterrows()]
+        # Volume Suave
         fig.add_trace(go.Bar(
-            x=history.index, y=history['Volume'], name="Volume", marker_color=colors_vol, opacity=0.3
+            x=history.index, y=history['Volume'], name="Volume", 
+            marker_color='#86868b', opacity=0.3
         ), row=2, col=1)
 
+        # Layout Limpo (Visual Silence)
         fig.update_layout(
-            template='plotly_dark',
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', # Fundo transparente para mesclar com o CSS
-            height=600, xaxis_rangeslider_visible=False, showlegend=False,
-            margin=dict(l=0, r=0, t=30, b=0),
-            font=dict(family="Inter, sans-serif", size=12, color="#a0a0a0")
+            template='plotly_white', # Fundo branco nativo
+            paper_bgcolor='rgba(0,0,0,0)', 
+            plot_bgcolor='rgba(0,0,0,0)',
+            height=550, 
+            xaxis_rangeslider_visible=False, 
+            showlegend=False,
+            margin=dict(l=20, r=20, t=20, b=20),
+            hovermode="x unified"
         )
-        # Remove grades feias
-        fig.update_xaxes(showgrid=False, zeroline=False)
-        fig.update_yaxes(showgrid=True, gridcolor='rgba(255,255,255,0.05)', zeroline=False)
+        # Refinando as grades para serem quase invisíveis
+        fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='rgba(0,0,0,0.05)')
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='rgba(0,0,0,0.05)')
 
         st.plotly_chart(fig, use_container_width=True)
 
-        # SEÇÃO 3: NOTÍCIAS (DESIGN PREMIUM)
-        st.markdown("---")
-        st.markdown("<h3 style='color: #d4af37;'>📰 Inteligência de Mercado</h3>", unsafe_allow_html=True)
+        # SEÇÃO EMOCIONAL (Notícias)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<h4 style='font-weight: 600; color: #1d1d1f; margin-bottom: 20px;'>Contexto Global</h4>", unsafe_allow_html=True)
         
-        if not news:
-            st.info("Nenhuma notícia recente encontrada nos feeds globais.")
+        if news:
+            for n in news[:3]:
+                st.markdown(f"""
+                <div class="news-item">
+                    <a href="{n['link']}" target="_blank" class="news-link">{n['title']}</a>
+                    <div class="news-meta">{n.get('date', 'Recentemente')} • Google News</div>
+                </div>
+                """, unsafe_allow_html=True)
         else:
-            col_news1, col_news2 = st.columns(2)
-            for i, n in enumerate(news[:4]):
-                with (col_news1 if i % 2 == 0 else col_news2):
-                    st.markdown(f"""
-                    <div class="news-card">
-                        <div class="news-date">📅 {n.get('date', 'Recentemente')} • Fonte: Google News</div>
-                        <a href="{n['link']}" target="_blank" class="news-link">
-                            {n['title']}
-                        </a>
-                    </div>
-                    """, unsafe_allow_html=True)
+            st.markdown("<div style='color:#86868b; font-style:italic;'>Sem ruído no momento.</div>", unsafe_allow_html=True)
 
     else:
-        st.warning("Dados indisponíveis no momento. Tente outro ativo ou verifique sua conexão.")
+        st.warning("Dados indisponíveis temporariamente.")
 
-else:
-    st.info("👈 Selecione um ativo no menu lateral para iniciar a análise.")
+# FOOTER / CTA FINAL
+st.markdown("""
+<div class="cta-section">
+    <div class="cta-text">O futuro do seu patrimônio é agora.</div>
+    <div class="cta-sub">Mercado-FinancIA Pro.</div>
+</div>
+""", unsafe_allow_html=True)
