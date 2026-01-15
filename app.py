@@ -26,103 +26,76 @@ st.markdown("""
         color: #e0e0e0;
     }
 
-    /* --- O NOVO HEADER (A CAIXA BRANCA/DOURADA/PRATEADA) --- */
+    /* --- HEADER LUXUOSO --- */
     .logo-box {
-        /* Gradiente complexo: Branco -> Prata -> Toque de Ouro */
         background: linear-gradient(120deg, #ffffff 0%, #f0f0f0 30%, #e6e6e6 50%, #fbf5b7 85%, #d4af37 100%);
         border: 2px solid #ffffff;
         border-radius: 20px;
         padding: 40px 20px;
         text-align: center;
-        margin-bottom: 50px;
-        /* Sombra dourada difusa para brilhar no fundo preto */
-        box-shadow: 
-            0 0 30px rgba(212, 175, 55, 0.3),
-            inset 0 0 20px rgba(255, 255, 255, 0.8);
+        margin-bottom: 30px;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.8);
         position: relative;
         overflow: hidden;
     }
     
-    /* Efeito de brilho passando (opcional/sutil) */
     .logo-box::before {
-        content: '';
-        position: absolute;
-        top: 0; left: -50%;
-        width: 100%; height: 100%;
+        content: ''; position: absolute; top: 0; left: -50%; width: 100%; height: 100%;
         background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
-        transform: skewX(-25deg);
-        animation: shine 6s infinite;
+        transform: skewX(-25deg); animation: shine 6s infinite;
     }
 
     .logo-text {
-        font-family: 'Cinzel', serif; /* Fonte estilo Roma Antiga/Bancos */
-        font-size: 65px;
-        font-weight: 700;
-        margin: 0;
-        letter-spacing: 2px;
-        color: #1a1a1a; /* Texto escuro para contrastar com o fundo claro */
-        text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+        font-family: 'Cinzel', serif; font-size: 65px; font-weight: 700; margin: 0; letter-spacing: 2px;
+        color: #1a1a1a; text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
     }
-
-    .logo-highlight {
-        color: #b8860b; /* Dourado Escuro para o "IAS" */
-        text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
-    }
-
+    .logo-highlight { color: #b8860b; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
     .logo-subtitle {
-        font-family: 'Inter', sans-serif;
-        color: #555; /* Cinza escuro */
-        font-size: 16px;
-        font-weight: 500;
-        margin-top: 15px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        font-family: 'Inter', sans-serif; color: #555; font-size: 16px; font-weight: 500;
+        margin-top: 15px; text-transform: uppercase; letter-spacing: 1px;
     }
-    
-    .logo-sub-detail {
-        font-size: 14px;
-        color: #777;
-        margin-top: 5px;
-        font-style: italic;
-    }
+    .logo-sub-detail { font-size: 14px; color: #777; margin-top: 5px; font-style: italic; }
 
-    /* --- CARDS DE OURO E PRATA (Ajustados para o tema) --- */
+    /* --- NOVO: MARKET TICKER CARDS (Resumo de Mercado) --- */
+    .market-card {
+        background-color: rgba(30, 30, 30, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        backdrop-filter: blur(5px);
+        transition: transform 0.2s;
+    }
+    .market-card:hover { transform: scale(1.05); border-color: #d4af37; }
+    .market-symbol { font-size: 14px; color: #888; font-weight: 600; letter-spacing: 1px; }
+    .market-price { font-size: 18px; color: #fff; font-weight: 700; margin: 5px 0; }
+    .market-change-up { color: #00ff88; font-size: 13px; font-weight: 600; }
+    .market-change-down { color: #ff4b4b; font-size: 13px; font-weight: 600; }
+
+    /* --- CARDS METÁLICOS --- */
     .silver-card {
         background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #a0a0a0 100%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 15px;
-        padding: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 25px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.8);
-        color: #1a1a1a !important;
-        transition: transform 0.3s ease;
+        color: #1a1a1a !important; transition: transform 0.3s ease;
     }
     .silver-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
     
     .gold-card {
         background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 40%, #b38728 80%, #fbf5b7 100%);
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        border-radius: 15px;
-        padding: 25px;
+        border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 15px; padding: 25px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,215,0,0.5);
-        color: #3b2a05 !important;
-        text-align: center;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        color: #3b2a05 !important; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;
         transition: transform 0.3s ease;
     }
     .gold-card:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); }
 
-    /* SIDEBAR */
+    /* SIDEBAR & INPUTS */
     [data-testid="stSidebar"] { background-color: #0a0a0a; border-right: 1px solid #222; }
     [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: #d4af37 !important; }
-    
-    /* INPUTS */
     .stSelectbox > div > div { background-color: #111 !important; color: white !important; border: 1px solid #333; }
     .stSlider > div > div > div > div { background-color: #d4af37 !important; }
     
-    /* ANIMAÇÃO DE BRILHO */
     @keyframes shine { 100% { left: 125%; } }
     
     .cta-section {
@@ -158,6 +131,42 @@ def get_real_news(term):
         return googlenews.result()
     except: return []
 
+# --- NOVA FUNÇÃO: RESUMO DE MERCADO ---
+def render_market_summary():
+    # Lista de ativos para o radar (Ticker Yahoo : Nome Exibição)
+    summary_tickers = {
+        "^BVSP": "IBOVESPA",
+        "BRL=X": "USD/BRL",
+        "EURBRL=X": "EUR/BRL",
+        "^GSPC": "S&P 500",
+        "BTC-USD": "BITCOIN"
+    }
+    
+    cols = st.columns(len(summary_tickers))
+    
+    for i, (ticker, name) in enumerate(summary_tickers.items()):
+        try:
+            data = yf.Ticker(ticker).history(period="5d")
+            if not data.empty:
+                current = data['Close'].iloc[-1]
+                prev = data['Close'].iloc[-2]
+                change = ((current - prev) / prev) * 100
+                
+                color_class = "market-change-up" if change >= 0 else "market-change-down"
+                arrow = "▲" if change >= 0 else "▼"
+                
+                with cols[i]:
+                    st.markdown(f"""
+                    <div class="market-card">
+                        <div class="market-symbol">{name}</div>
+                        <div class="market-price">{current:,.2f}</div>
+                        <div class="{color_class}">{arrow} {change:.2f}%</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+        except:
+            pass
+# --------------------------------------
+
 def analyze_sentiment(news_list):
     if not news_list: return 0, "Analisando..."
     polarity_sum, count = 0, 0
@@ -174,7 +183,7 @@ def analyze_sentiment(news_list):
 
 # --- 4. LAYOUT PRINCIPAL ---
 
-# === NOVO HEADER LUXUOSO (BRANCO, DOURADO E PRATA) ===
+# HEADER LUXUOSO
 st.markdown("""
 <div class="logo-box">
     <div class="logo-text">
@@ -188,7 +197,12 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-# ======================================================
+
+# === INSERINDO O RADAR DE MERCADO ===
+st.markdown("<h5 style='color:#888; margin-bottom:10px;'>📡 Radar de Mercado (Tempo Real)</h5>", unsafe_allow_html=True)
+render_market_summary()
+st.markdown("<br><hr style='border-color: #333;'><br>", unsafe_allow_html=True)
+# ====================================
 
 # VALUE PROPOSITION
 col_v1, col_v2, col_v3 = st.columns(3)
