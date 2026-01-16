@@ -436,23 +436,18 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER DE LUXO (CORRIGIDO) ---
-# AQUI ESTAVA O ERRO! AGORA ESTÁ CERTO COM 'unsafe_allow_html=True'
+# --- FOOTER SIMPLES & ELEGANTE (FINAL DA PÁGINA) ---
 st.markdown("""
-<div class="footer-container">
-    <div class="footer-small-text">Designed & Developed by</div>
-    
-    <div class="footer-name">EDSON</div>
-    
-    <div class="footer-role">CEO • BOLSAVALORIAS</div>
-    
-    <div style="margin-top: 20px;">
-        <img src="https://img.icons8.com/ios-filled/50/d4af37/signature.png" width="40" style="opacity: 0.6;">
-    </div>
-
-    <div class="footer-copy">
-        &copy; 2026 BOLSAVALORIAS INTELLIGENCE. <br> 
-        Todos os direitos reservados.
-    </div>
+<div style="margin-top: 100px; padding: 40px 20px; border-top: 1px solid #222; text-align: center; color: #888;">
+    <p style="font-size: 16px; margin-bottom: 10px;">
+        Desenvolvido com excelência por 
+        <span style="color: #d4af37; font-weight: 700; letter-spacing: 1px;">EDSON</span>
+    </p>
+    <p style="font-size: 14px; font-style: italic; color: #666;">
+        CEO • BolsaValorIAS Intelligence
+    </p>
+    <p style="font-size: 12px; margin-top: 20px; opacity: 0.5;">
+        © 2026 - Tecnologia Financeira de Ponta.
+    </p>
 </div>
 """, unsafe_allow_html=True)
