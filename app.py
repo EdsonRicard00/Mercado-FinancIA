@@ -436,18 +436,22 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER SIMPLES & ELEGANTE (FINAL DA PÁGINA) ---
+# --- FOOTER COM FOTO E GITHUB ---
 st.markdown("""
-<div style="margin-top: 100px; padding: 40px 20px; border-top: 1px solid #222; text-align: center; color: #888;">
-    <p style="font-size: 16px; margin-bottom: 10px;">
-        Desenvolvido com excelência por 
-        <span style="color: #d4af37; font-weight: 700; letter-spacing: 1px;">EDSON</span>
+<div style="margin-top: 100px; padding: 40px 20px; border-top: 1px solid #333; text-align: center;">
+    <img src="https://github.com/EdsonRicard00.png" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #d4af37; margin-bottom: 15px;">
+    
+    <p style="font-size: 18px; margin-bottom: 5px; color: #fff; font-family: 'Inter', sans-serif;">
+        Desenvolvido por <span style="color: #d4af37; font-weight: 700;">EDSON</span>
     </p>
-    <p style="font-size: 14px; font-style: italic; color: #666;">
-        CEO • BolsaValorIAS Intelligence
-    </p>
-    <p style="font-size: 12px; margin-top: 20px; opacity: 0.5;">
-        © 2026 - Tecnologia Financeira de Ponta.
+    
+    <a href="https://github.com/EdsonRicard00" target="_blank" style="text-decoration: none; color: #888; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 20px; font-family: 'Inter', sans-serif;">
+        <img src="https://img.icons8.com/material-outlined/24/888888/github.png" style="width: 20px;"> 
+        github.com/EdsonRicard00
+    </a>
+
+    <p style="font-size: 12px; color: #555; margin-top: 10px; font-family: 'Inter', sans-serif;">
+        CEO • BolsaValorIAS Intelligence © 2026
     </p>
 </div>
 """, unsafe_allow_html=True)
