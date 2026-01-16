@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 # --- 1. CONFIGURAÇÃO DA PÁGINA ---
-st.set_page_config(layout="wide", page_title="BolsaValorIAS", page_icon="🏛️")
+st.set_page_config(layout="wide", page_title="BolsaValorIAS", page_icon="🚀")
 
 # --- 2. CSS PREMIUM (DESIGN DE LUXO) ---
 st.markdown("""
@@ -94,45 +94,6 @@ st.markdown("""
     .highlight-card { background: #0e0e0e; border: 1px solid #1f1f1f; padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s ease; }
     .stockai-header { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 15px; }
     
-    /* --- FOOTER DE LUXO (CSS) --- */
-    .footer-container {
-        margin-top: 100px;
-        padding: 60px 20px 40px 20px;
-        background: linear-gradient(to top, #080808 0%, #000000 100%);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        text-align: center;
-        position: relative;
-    }
-    /* Linha de Ouro no Topo */
-    .footer-container::before {
-        content: '';
-        position: absolute;
-        top: -1px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #d4af37, transparent);
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
-    }
-    .footer-small-text {
-        font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 4px;
-        text-transform: uppercase; color: #666; margin-bottom: 10px;
-    }
-    .footer-name {
-        font-family: 'Cinzel', serif; font-size: 42px; font-weight: 700;
-        background: linear-gradient(180deg, #ffffff 20%, #d4af37 80%);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        margin: 5px 0; letter-spacing: 2px; text-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    }
-    .footer-role {
-        font-family: 'Playfair Display', serif; font-size: 16px; color: #a0a0a0; font-style: italic; margin-bottom: 30px;
-    }
-    .footer-copy {
-        font-family: 'Inter', sans-serif; font-size: 11px; color: #333;
-        border-top: 1px solid #111; display: inline-block; padding-top: 20px; margin-top: 20px;
-    }
-
     /* SIDEBAR & INPUTS */
     [data-testid="stSidebar"] { background-color: #0a0a0a; border-right: 1px solid #222; }
     [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2 { color: #d4af37 !important; }
@@ -436,8 +397,8 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER SIMPLES (TEXTO PURO) ---
-st.markdown("---") # Linha divisória simples
+# --- FOOTER SIMPLES E FUNCIONAL (FINAL) ---
+st.markdown("---")
 
 st.markdown("""
 <div style="text-align: center;">
