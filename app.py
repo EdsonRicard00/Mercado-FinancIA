@@ -437,27 +437,35 @@ if destaque_data is not None:
             except: pass
 
 # --- FOOTER FINAL (SIMPLES E FUNCIONAL) ---
-st.markdown("""
-<div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #333; text-align: center;">
-    
-    <img src="https://github.com/EdsonRicard00.png" 
-        style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid #d4af37; margin-bottom: 15px;">
-    
-    <p style="color: #fff; font-size: 20px; font-family: sans-serif; margin-bottom: 5px;">
-        Desenvolvido por <strong style="color: #d4af37;">EDSON</strong>
-    </p>
-    
-    <p style="color: #888; font-size: 14px; margin-bottom: 20px;">
-        CEO da BolsaValorIAS
-    </p>
+st.markdown(
+    """
+    <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #333; text-align: center;">
+        
+        <img src="https://github.com/EdsonRicard00.png"
+            style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid #d4af37; margin-bottom: 15px;">
+        
+        <p style="color: #fff; font-size: 20px; font-family: sans-serif; margin-bottom: 5px;">
+            Desenvolvido por <strong style="color: #d4af37;">EDSON</strong>
+        </p>
+        
+        <p style="color: #888; font-size: 14px; margin-bottom: 20px;">
+            CEO da BolsaValorIAS
+        </p>
 
-    <a href="https://github.com/EdsonRicard00" target="_blank" 
-    style="display: inline-block; text-decoration: none; color: #fff; background-color: #1a1a1a; padding: 10px 25px; border-radius: 30px; border: 1px solid #444; font-size: 14px; transition: 0.3s;">
-    🔗 Acessar meu GitHub
-    </a>
+        <a href="https://github.com/EdsonRicard00"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="display: inline-block; text-decoration: none; color: #fff;
+                  background-color: #1a1a1a; padding: 10px 25px;
+                  border-radius: 30px; border: 1px solid #444;
+                  font-size: 14px; transition: 0.3s;">
+            🔗 Acessar meu GitHub
+        </a>
 
-    <p style="color: #444; font-size: 12px; margin-top: 30px;">
-        © 2026 Todos os direitos reservados.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+        <p style="color: #444; font-size: 12px; margin-top: 30px;">
+            © 2026 Todos os direitos reservados.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
