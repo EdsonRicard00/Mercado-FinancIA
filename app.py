@@ -143,7 +143,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS RESTAURADOS) ---
+# --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS) ---
 ASSET_DB = {
     # --- 🇺🇸 BIG TECH & US GIANTS ---
     "🇺🇸 Apple (AAPL)": "AAPL",
@@ -436,7 +436,7 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER DE LUXO (FINAL DA PÁGINA - CORRIGIDO) ---
+# --- FOOTER DE LUXO (FINAL DA PÁGINA) ---
 st.markdown("""
 <div class="footer-container">
     <div class="footer-small-text">Designed & Developed by</div>
