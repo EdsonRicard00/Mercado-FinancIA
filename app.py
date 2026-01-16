@@ -436,36 +436,34 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER FINAL (SIMPLES E FUNCIONAL) ---
-st.markdown(
-    """
-    <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #333; text-align: center;">
-        
-        <img src="https://github.com/EdsonRicard00.png"
-            style="width: 110px; height: 110px; border-radius: 50%; border: 4px solid #d4af37; margin-bottom: 15px;">
-        
-        <p style="color: #fff; font-size: 20px; font-family: sans-serif; margin-bottom: 5px;">
-            Desenvolvido por <strong style="color: #d4af37;">EDSON</strong>
-        </p>
-        
-        <p style="color: #888; font-size: 14px; margin-bottom: 20px;">
-            CEO da BolsaValorIAS
-        </p>
+# --- FOOTER FINAL: CEO & DEVELOPER (Adicione no final do arquivo) ---
+st.markdown("""
+<div style="margin-top: 100px; padding-top: 50px; border-top: 1px solid #333; text-align: center;">
+    
+    <p style="color: #666; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;">
+        High Performance Tech
+    </p>
 
-        <a href="https://github.com/EdsonRicard00"
-           target="_blank"
-           rel="noopener noreferrer"
-           style="display: inline-block; text-decoration: none; color: #fff;
-                  background-color: #1a1a1a; padding: 10px 25px;
-                  border-radius: 30px; border: 1px solid #444;
-                  font-size: 14px; transition: 0.3s;">
-            🔗 Acessar meu GitHub
-        </a>
+    <h3 style="color: #ffffff; font-family: sans-serif; font-size: 26px; margin: 0; font-weight: 700;">
+        EDSON RICARDO
+    </h3>
+    <p style="color: #d4af37; font-size: 16px; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">
+        CEO & LEAD DEVELOPER
+    </p>
 
-        <p style="color: #444; font-size: 12px; margin-top: 30px;">
-            © 2026 Todos os direitos reservados.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    <div style="margin: 25px auto; width: 60px; height: 2px; background-color: #d4af37;"></div>
+    <p style="color: #b0b0b0; font-style: italic; font-size: 16px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+        "Transformando a complexidade do mercado em clareza absoluta através da tecnologia."
+    </p>
+
+    <a href="https://github.com/EdsonRicard00" target="_blank" 
+    style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #000; background-color: #d4af37; padding: 12px 30px; border-radius: 4px; font-weight: bold; font-size: 14px; transition: 0.3s;">
+    <img src="https://img.icons8.com/material-outlined/24/000000/github.png" width="20">
+    GITHUB OFICIAL
+    </a>
+
+    <p style="color: #444; font-size: 12px; margin-top: 40px;">
+        © 2026 BolsaValorIAS Intelligence. Todos os direitos reservados.
+    </p>
+</div>
+""", unsafe_allow_html=True)
