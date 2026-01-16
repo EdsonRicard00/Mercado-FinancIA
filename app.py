@@ -436,34 +436,31 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER FINAL: CEO & DEVELOPER (Adicione no final do arquivo) ---
+# --- FOOTER SIMPLES (TEXTO PURO) ---
+st.markdown("---") # Linha divisória simples
+
 st.markdown("""
-<div style="margin-top: 100px; padding-top: 50px; border-top: 1px solid #333; text-align: center;">
+<div style="text-align: center;">
     
-    <p style="color: #666; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;">
+    <p style="color: #666; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">
         High Performance Tech
     </p>
 
-    <h3 style="color: #ffffff; font-family: sans-serif; font-size: 26px; margin: 0; font-weight: 700;">
+    <h2 style="color: #d4af37; font-family: sans-serif; margin: 0;">
         EDSON RICARDO
-    </h3>
-    <p style="color: #d4af37; font-size: 16px; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">
+    </h2>
+    
+    <p style="color: #ffffff; font-weight: bold; font-size: 14px; margin-top: 5px;">
         CEO & LEAD DEVELOPER
     </p>
 
-    <div style="margin: 25px auto; width: 60px; height: 2px; background-color: #d4af37;"></div>
-    <p style="color: #b0b0b0; font-style: italic; font-size: 16px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+    <p style="color: #a0a0a0; font-style: italic; margin-top: 20px; font-size: 14px;">
         "Transformando a complexidade do mercado em clareza absoluta através da tecnologia."
     </p>
 
-    <a href="https://github.com/EdsonRicard00" target="_blank" 
-    style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #000; background-color: #d4af37; padding: 12px 30px; border-radius: 4px; font-weight: bold; font-size: 14px; transition: 0.3s;">
-    <img src="https://img.icons8.com/material-outlined/24/000000/github.png" width="20">
-    GITHUB OFICIAL
-    </a>
-
-    <p style="color: #444; font-size: 12px; margin-top: 40px;">
+    <p style="color: #444; font-size: 11px; margin-top: 30px;">
         © 2026 BolsaValorIAS Intelligence. Todos os direitos reservados.
     </p>
+
 </div>
 """, unsafe_allow_html=True)
