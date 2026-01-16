@@ -9,7 +9,7 @@ import numpy as np
 # --- 1. CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(layout="wide", page_title="BolsaValorIAS", page_icon="🏛️")
 
-# --- 2. CSS PREMIUM (HOVER DOURADO & FOOTER CEO) ---
+# --- 2. CSS PREMIUM (HOVER DOURADO & FOOTER DE LUXO) ---
 st.markdown("""
 <style>
     /* IMPORTANDO FONTES */
@@ -45,7 +45,6 @@ st.markdown("""
     .logo-subtitle { font-family: 'Inter', sans-serif; color: #555; font-size: 16px; font-weight: 500; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
 
     /* --- INTERATIVIDADE DOURADA (HOVER EFFECT) --- */
-    /* Quando passar o mouse, a caixa brilha em dourado */
     .dash-card:hover, .top-ticker-box:hover, .highlight-card:hover, .news-item:hover {
         border-color: #d4af37 !important;
         box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important;
@@ -95,26 +94,42 @@ st.markdown("""
     .highlight-card { background: #0e0e0e; border: 1px solid #1f1f1f; padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s ease; }
     .stockai-header { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 15px; }
     
-    /* --- FOOTER (RODAPÉ DO CEO) --- */
-    .ceo-footer {
-        margin-top: 80px;
-        padding: 40px;
+    /* --- FOOTER DE LUXO (CSS ATUALIZADO) --- */
+    .footer-container {
+        margin-top: 100px;
+        padding: 60px 20px 40px 20px;
+        background: linear-gradient(to top, #080808 0%, #000000 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
         text-align: center;
-        border-top: 1px solid #222;
-        background: linear-gradient(to bottom, #050505, #111);
+        position: relative;
     }
-    .ceo-text {
-        font-family: 'Cinzel', serif;
-        color: #d4af37;
-        font-size: 18px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
+    .footer-container::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
     }
-    .ceo-sub {
-        font-family: 'Inter', sans-serif;
-        color: #666;
-        font-size: 12px;
-        margin-top: 10px;
+    .footer-small-text {
+        font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 4px;
+        text-transform: uppercase; color: #666; margin-bottom: 10px;
+    }
+    .footer-name {
+        font-family: 'Cinzel', serif; font-size: 42px; font-weight: 700;
+        background: linear-gradient(180deg, #ffffff 20%, #d4af37 80%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        margin: 5px 0; letter-spacing: 2px; text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+    .footer-role {
+        font-family: 'Playfair Display', serif; font-size: 16px; color: #a0a0a0; font-style: italic; margin-bottom: 30px;
+    }
+    .footer-copy {
+        font-family: 'Inter', sans-serif; font-size: 11px; color: #333;
+        border-top: 1px solid #111; display: inline-block; padding-top: 20px; margin-top: 20px;
     }
 
     /* SIDEBAR & INPUTS */
@@ -128,114 +143,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS) ---
-ASSET_DB = ASSET_DB = {
-    # --- 🇺🇸 BIG TECH & US GIANTS ---
-    "🇺🇸 Apple (AAPL)": "AAPL",
-    "🇺🇸 Microsoft (MSFT)": "MSFT",
-    "🇺🇸 NVIDIA (NVDA)": "NVDA",
-    "🇺🇸 Amazon (AMZN)": "AMZN",
-    "🇺🇸 Alphabet/Google (GOOGL)": "GOOGL",
-    "🇺🇸 Meta/Facebook (META)": "META",
-    "🇺🇸 Tesla (TSLA)": "TSLA",
-    "🇺🇸 Netflix (NFLX)": "NFLX",
-    "🇺🇸 AMD (AMD)": "AMD",
-    "🇺🇸 Intel (INTC)": "INTC",
-    "🇺🇸 Broadcom (AVGO)": "AVGO",
-    "🇺🇸 Qualcomm (QCOM)": "QCOM",
-    "🇺🇸 Adobe (ADBE)": "ADBE",
-    "🇺🇸 Salesforce (CRM)": "CRM",
-    "🇺🇸 Oracle (ORCL)": "ORCL",
-    "🇺🇸 Uber (UBER)": "UBER",
-    "🇺🇸 Airbnb (ABNB)": "ABNB",
-    "🇺🇸 Disney (DIS)": "DIS",
-    "🇺🇸 Coca-Cola (KO)": "KO",
-    "🇺🇸 PepsiCo (PEP)": "PEP",
-    "🇺🇸 McDonald's (MCD)": "MCD",
-    "🇺🇸 Starbucks (SBUX)": "SBUX",
-    "🇺🇸 Nike (NKE)": "NKE",
-    "🇺🇸 Walmart (WMT)": "WMT",
-    "🇺🇸 Costco (COST)": "COST",
-    "🇺🇸 Visa (V)": "V",
-    "🇺🇸 Mastercard (MA)": "MA",
-    "🇺🇸 JPMorgan (JPM)": "JPM",
-    "🇺🇸 Bank of America (BAC)": "BAC",
-    "🇺🇸 Goldman Sachs (GS)": "GS",
-    "🇺🇸 Exxon Mobil (XOM)": "XOM",
-    "🇺🇸 Chevron (CVX)": "CVX",
-    "🇺🇸 Pfizer (PFE)": "PFE",
-    "🇺🇸 Johnson & Johnson (JNJ)": "JNJ",
-    "🇺🇸 Eli Lilly (LLY)": "LLY",
-    "🇺🇸 Berkshire Hathaway (BRK-B)": "BRK-B",
-
-    # --- 🇧🇷 BRASIL (B3 IBOVESPA) ---
-    "🇧🇷 Petrobras PN (PETR4)": "PETR4.SA",
-    "🇧🇷 Petrobras ON (PETR3)": "PETR3.SA",
-    "🇧🇷 Vale (VALE3)": "VALE3.SA",
-    "🇧🇷 Itaú Unibanco (ITUB4)": "ITUB4.SA",
-    "🇧🇷 Bradesco PN (BBDC4)": "BBDC4.SA",
-    "🇧🇷 Bradesco ON (BBDC3)": "BBDC3.SA",
-    "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA",
-    "🇧🇷 Santander (SANB11)": "SANB11.SA",
-    "🇧🇷 BTG Pactual (BPAC11)": "BPAC11.SA",
-    "🇧🇷 B3 (B3SA3)": "B3SA3.SA",
-    "🇧🇷 Ambev (ABEV3)": "ABEV3.SA",
-    "🇧🇷 Weg (WEGE3)": "WEGE3.SA",
-    "🇧🇷 Suzano (SUZB3)": "SUZB3.SA",
-    "🇧🇷 Gerdau (GGBR4)": "GGBR4.SA",
-    "🇧🇷 CSN (CSNA3)": "CSNA3.SA",
-    "🇧🇷 Usiminas (USIM5)": "USIM5.SA",
-    "🇧🇷 JBS (JBSS3)": "JBSS3.SA",
-    "🇧🇷 Marfrig (MRFG3)": "MRFG3.SA",
-    "🇧🇷 BRF (BRFS3)": "BRFS3.SA",
-    "🇧🇷 Eletrobras (ELET3)": "ELET3.SA",
-    "🇧🇷 Eletrobras PN (ELET6)": "ELET6.SA",
-    "🇧🇷 Copel (CPLE6)": "CPLE6.SA",
-    "🇧🇷 Cemig (CMIG4)": "CMIG4.SA",
-    "🇧🇷 Engie (ENGI11)": "ENGI11.SA",
-    "🇧🇷 Equatorial (EQTL3)": "EQTL3.SA",
-    "🇧🇷 Sabesp (SBSP3)": "SBSP3.SA",
-    "🇧🇷 Prio (PRIO3)": "PRIO3.SA",
-    "🇧🇷 Brava Energia (BRAV3)": "BRAV3.SA",
-    "🇧🇷 Localiza (RENT3)": "RENT3.SA",
-    "🇧🇷 Rumo (RAIL3)": "RAIL3.SA",
-    "🇧🇷 Azul (AZUL4)": "AZUL4.SA",
-    "🇧🇷 Embraer (EMBR3)": "EMBR3.SA",
-    "🇧🇷 Magazine Luiza (MGLU3)": "MGLU3.SA",
-    "🇧🇷 Lojas Renner (LREN3)": "LREN3.SA",
-    "🇧🇷 Raia Drogasil (RADL3)": "RADL3.SA",
-    "🇧🇷 Vibra (VBBR3)": "VBBR3.SA",
-    "🇧🇷 Ultrapar (UGPA3)": "UGPA3.SA",
-    "🇧🇷 Hapvida (HAPV3)": "HAPV3.SA",
-    "🇧🇷 Rede D'Or (RDOR3)": "RDOR3.SA",
-    "🇧🇷 Telefônica/Vivo (VIVT3)": "VIVT3.SA",
-    "🇧🇷 TIM (TIMS3)": "TIMS3.SA",
-    "🇧🇷 Totvs (TOTS3)": "TOTS3.SA",
-    "🇧🇷 Nubank (ROXO34/NU)": "NU",
-    "🇧🇷 XP Inc (XP)": "XP",
-
-    # --- ₿ CRIPTO & MOEDAS ---
-    "₿ Bitcoin (USD)": "BTC-USD",
-    "₿ Ethereum (USD)": "ETH-USD",
-    "₿ Solana (USD)": "SOL-USD",
-    "💵 Dólar (USD/BRL)": "BRL=X",
-    "💶 Euro (EUR/BRL)": "EURBRL=X",
-
-    # --- 🌍 GLOBAL & COMMODITIES ---
-    "🟡 Ouro (Gold Futures)": "GC=F",
-    "⚪ Prata (Silver Futures)": "SI=F",
-    "🛢️ Petróleo WTI": "CL=F",
-    "🛢️ Petróleo Brent": "BZ=F",
-    "🌏 TSMC (Taiwan)": "TSM",
-    "🌏 Alibaba (China)": "BABA",
-    "🌏 Tencent (China)": "TCEHY",
-    "🌏 Samsung (Coreia)": "SSNLF",
-    "🌏 Toyota (Japão)": "TM",
-    "🌏 Sony (Japão)": "SONY",
-    "🌏 Shell (UK)": "SHEL",
-    "🌏 AstraZeneca (UK)": "AZN",
-    "🌏 SAP (Alemanha)": "SAP",
-    "🌏 ASML (Holanda)": "ASML",
-    "🌏 LVMH (Louis Vuitton)": "LVMUY",
+ASSET_DB = {
+    "🇺🇸 Apple (AAPL)": "AAPL", "🇺🇸 Microsoft (MSFT)": "MSFT", "🇺🇸 NVIDIA (NVDA)": "NVDA", "🇺🇸 Amazon (AMZN)": "AMZN",
+    "🇺🇸 Alphabet/Google (GOOGL)": "GOOGL", "🇺🇸 Meta (META)": "META", "🇺🇸 Tesla (TSLA)": "TSLA",
+    "🇺🇸 Netflix (NFLX)": "NFLX", "🇺🇸 Coca-Cola (KO)": "KO", "🇺🇸 McDonald's (MCD)": "MCD", "🇺🇸 Disney (DIS)": "DIS",
+    "🇧🇷 Petrobras PN (PETR4)": "PETR4.SA", "🇧🇷 Vale (VALE3)": "VALE3.SA", "🇧🇷 Itaú (ITUB4)": "ITUB4.SA",
+    "🇧🇷 Bradesco (BBDC4)": "BBDC4.SA", "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA", "🇧🇷 Ambev (ABEV3)": "ABEV3.SA",
+    "🇧🇷 Weg (WEGE3)": "WEGE3.SA", "🇧🇷 Magalu (MGLU3)": "MGLU3.SA", "🇧🇷 Nubank (NU)": "NU",
+    "₿ Bitcoin (USD)": "BTC-USD", "₿ Ethereum (USD)": "ETH-USD", "💵 Dólar (USD/BRL)": "BRL=X",
+    "🟡 Ouro (Gold)": "GC=F", "🛢️ Petróleo Brent": "BZ=F"
 }
 
 @st.cache_data(ttl=300)
@@ -315,7 +231,7 @@ with col_left:
     selected_name = st.selectbox("", options=list(ASSET_DB.keys()), label_visibility="collapsed")
     ticker = ASSET_DB[selected_name]
     
-    # --- NOVO HORIZONTE DE 30 ANOS ---
+    # --- HORIZONTE DE 30 ANOS ---
     st.markdown('<br><div class="control-label">Horizonte</div>', unsafe_allow_html=True)
     time_map = {
         "1 Dia": "1d", "5 Dias": "5d", "1 Mês": "1mo", "1 Ano": "1y", 
@@ -388,7 +304,7 @@ with col_right:
     sent_color = "#00ff88" if sentiment_score > 0.05 else "#ff3b30" if sentiment_score < -0.05 else "#aaaaaa"
     
     st.markdown(f"""
-        <div class="ai-badge">⚡ Análise IA</div>
+        <div class="ai-badge">⚡Análise IA</div>
         <div style="font-size: 12px; color: #888;">Sentimento Global</div>
         <div class="sentiment-score" style="color: {sent_color}; font-size: 28px;">{sent_label}</div>
         <div style="height: 4px; width: 100%; background: #333; margin-top: 10px; border-radius: 2px;">
@@ -420,12 +336,22 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER DO CEO (RODAPÉ) ---
+# --- FOOTER DE LUXO (FINAL DA PÁGINA) ---
 st.markdown("""
-<div class="ceo-footer">
-    <div class="ceo-text">Desenvolvido por Edson</div>
-    <div style="color: #666; font-size: 14px; margin: 5px 0;">&</div>
-    <div class="ceo-text">CEO da BolsaValorIAS</div>
-    <div class="ceo-sub">© 2026 Todos os direitos reservados. Inteligência Artificial Financeira.</div>
+<div class="footer-container">
+    <div class="footer-small-text">Designed & Developed by</div>
+    
+    <div class="footer-name">EDSON</div>
+    
+    <div class="footer-role">CEO • BOLSAVALORIAS</div>
+    
+    <div style="margin-top: 20px;">
+        <img src="https://img.icons8.com/ios-filled/50/d4af37/signature.png" width="40" style="opacity: 0.6;">
+    </div>
+
+    <div class="footer-copy">
+        &copy; 2026 BOLSAVALORIAS INTELLIGENCE. <br> 
+        Todos os direitos reservados.
+    </div>
 </div>
 """, unsafe_allow_html=True)
