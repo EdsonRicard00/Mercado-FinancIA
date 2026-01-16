@@ -436,19 +436,21 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER COM FOTO E GITHUB ---
+# --- FOOTER COM FOTO E GITHUB (FINAL DA PÁGINA) ---
 st.markdown("""
 <div style="margin-top: 100px; padding: 40px 20px; border-top: 1px solid #333; text-align: center;">
-    <img src="https://github.com/EdsonRicard00.png" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #d4af37; margin-bottom: 15px;">
+    <img src="https://github.com/EdsonRicard00.png" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #d4af37; margin-bottom: 15px; object-fit: cover;">
     
     <p style="font-size: 18px; margin-bottom: 5px; color: #fff; font-family: 'Inter', sans-serif;">
         Desenvolvido por <span style="color: #d4af37; font-weight: 700;">EDSON</span>
     </p>
     
-    <a href="https://github.com/EdsonRicard00" target="_blank" style="text-decoration: none; color: #888; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 20px; font-family: 'Inter', sans-serif;">
-        <img src="https://img.icons8.com/material-outlined/24/888888/github.png" style="width: 20px;"> 
-        github.com/EdsonRicard00
-    </a>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+        <a href="https://github.com/EdsonRicard00" target="_blank" style="text-decoration: none; color: #888; font-size: 14px; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 5px;">
+            <img src="https://img.icons8.com/material-outlined/24/888888/github.png" style="width: 20px; height: 20px;"> 
+            github.com/EdsonRicard00
+        </a>
+    </div>
 
     <p style="font-size: 12px; color: #555; margin-top: 10px; font-family: 'Inter', sans-serif;">
         CEO • BolsaValorIAS Intelligence © 2026
