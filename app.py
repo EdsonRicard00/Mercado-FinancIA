@@ -94,7 +94,7 @@ st.markdown("""
     .highlight-card { background: #0e0e0e; border: 1px solid #1f1f1f; padding: 15px; border-radius: 12px; text-align: center; transition: all 0.3s ease; }
     .stockai-header { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 15px; }
     
-    /* --- FOOTER DE LUXO (CSS ATUALIZADO) --- */
+    /* --- FOOTER DE LUXO (CSS) --- */
     .footer-container {
         margin-top: 100px;
         padding: 60px 20px 40px 20px;
@@ -103,6 +103,7 @@ st.markdown("""
         text-align: center;
         position: relative;
     }
+    /* Linha de Ouro no Topo */
     .footer-container::before {
         content: '';
         position: absolute;
@@ -142,16 +143,115 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS) ---
+# --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS RESTAURADOS) ---
 ASSET_DB = {
-    "🇺🇸 Apple (AAPL)": "AAPL", "🇺🇸 Microsoft (MSFT)": "MSFT", "🇺🇸 NVIDIA (NVDA)": "NVDA", "🇺🇸 Amazon (AMZN)": "AMZN",
-    "🇺🇸 Alphabet/Google (GOOGL)": "GOOGL", "🇺🇸 Meta (META)": "META", "🇺🇸 Tesla (TSLA)": "TSLA",
-    "🇺🇸 Netflix (NFLX)": "NFLX", "🇺🇸 Coca-Cola (KO)": "KO", "🇺🇸 McDonald's (MCD)": "MCD", "🇺🇸 Disney (DIS)": "DIS",
-    "🇧🇷 Petrobras PN (PETR4)": "PETR4.SA", "🇧🇷 Vale (VALE3)": "VALE3.SA", "🇧🇷 Itaú (ITUB4)": "ITUB4.SA",
-    "🇧🇷 Bradesco (BBDC4)": "BBDC4.SA", "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA", "🇧🇷 Ambev (ABEV3)": "ABEV3.SA",
-    "🇧🇷 Weg (WEGE3)": "WEGE3.SA", "🇧🇷 Magalu (MGLU3)": "MGLU3.SA", "🇧🇷 Nubank (NU)": "NU",
-    "₿ Bitcoin (USD)": "BTC-USD", "₿ Ethereum (USD)": "ETH-USD", "💵 Dólar (USD/BRL)": "BRL=X",
-    "🟡 Ouro (Gold)": "GC=F", "🛢️ Petróleo Brent": "BZ=F"
+    # --- 🇺🇸 BIG TECH & US GIANTS ---
+    "🇺🇸 Apple (AAPL)": "AAPL",
+    "🇺🇸 Microsoft (MSFT)": "MSFT",
+    "🇺🇸 NVIDIA (NVDA)": "NVDA",
+    "🇺🇸 Amazon (AMZN)": "AMZN",
+    "🇺🇸 Alphabet/Google (GOOGL)": "GOOGL",
+    "🇺🇸 Meta/Facebook (META)": "META",
+    "🇺🇸 Tesla (TSLA)": "TSLA",
+    "🇺🇸 Netflix (NFLX)": "NFLX",
+    "🇺🇸 AMD (AMD)": "AMD",
+    "🇺🇸 Intel (INTC)": "INTC",
+    "🇺🇸 Broadcom (AVGO)": "AVGO",
+    "🇺🇸 Qualcomm (QCOM)": "QCOM",
+    "🇺🇸 Adobe (ADBE)": "ADBE",
+    "🇺🇸 Salesforce (CRM)": "CRM",
+    "🇺🇸 Oracle (ORCL)": "ORCL",
+    "🇺🇸 Uber (UBER)": "UBER",
+    "🇺🇸 Airbnb (ABNB)": "ABNB",
+    "🇺🇸 Disney (DIS)": "DIS",
+    "🇺🇸 Coca-Cola (KO)": "KO",
+    "🇺🇸 PepsiCo (PEP)": "PEP",
+    "🇺🇸 McDonald's (MCD)": "MCD",
+    "🇺🇸 Starbucks (SBUX)": "SBUX",
+    "🇺🇸 Nike (NKE)": "NKE",
+    "🇺🇸 Walmart (WMT)": "WMT",
+    "🇺🇸 Costco (COST)": "COST",
+    "🇺🇸 Visa (V)": "V",
+    "🇺🇸 Mastercard (MA)": "MA",
+    "🇺🇸 JPMorgan (JPM)": "JPM",
+    "🇺🇸 Bank of America (BAC)": "BAC",
+    "🇺🇸 Goldman Sachs (GS)": "GS",
+    "🇺🇸 Exxon Mobil (XOM)": "XOM",
+    "🇺🇸 Chevron (CVX)": "CVX",
+    "🇺🇸 Pfizer (PFE)": "PFE",
+    "🇺🇸 Johnson & Johnson (JNJ)": "JNJ",
+    "🇺🇸 Eli Lilly (LLY)": "LLY",
+    "🇺🇸 Berkshire Hathaway (BRK-B)": "BRK-B",
+
+    # --- 🇧🇷 BRASIL (B3 IBOVESPA) ---
+    "🇧🇷 Petrobras PN (PETR4)": "PETR4.SA",
+    "🇧🇷 Petrobras ON (PETR3)": "PETR3.SA",
+    "🇧🇷 Vale (VALE3)": "VALE3.SA",
+    "🇧🇷 Itaú Unibanco (ITUB4)": "ITUB4.SA",
+    "🇧🇷 Bradesco PN (BBDC4)": "BBDC4.SA",
+    "🇧🇷 Bradesco ON (BBDC3)": "BBDC3.SA",
+    "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA",
+    "🇧🇷 Santander (SANB11)": "SANB11.SA",
+    "🇧🇷 BTG Pactual (BPAC11)": "BPAC11.SA",
+    "🇧🇷 B3 (B3SA3)": "B3SA3.SA",
+    "🇧🇷 Ambev (ABEV3)": "ABEV3.SA",
+    "🇧🇷 Weg (WEGE3)": "WEGE3.SA",
+    "🇧🇷 Suzano (SUZB3)": "SUZB3.SA",
+    "🇧🇷 Gerdau (GGBR4)": "GGBR4.SA",
+    "🇧🇷 CSN (CSNA3)": "CSNA3.SA",
+    "🇧🇷 Usiminas (USIM5)": "USIM5.SA",
+    "🇧🇷 JBS (JBSS3)": "JBSS3.SA",
+    "🇧🇷 Marfrig (MRFG3)": "MRFG3.SA",
+    "🇧🇷 BRF (BRFS3)": "BRFS3.SA",
+    "🇧🇷 Eletrobras (ELET3)": "ELET3.SA",
+    "🇧🇷 Eletrobras PN (ELET6)": "ELET6.SA",
+    "🇧🇷 Copel (CPLE6)": "CPLE6.SA",
+    "🇧🇷 Cemig (CMIG4)": "CMIG4.SA",
+    "🇧🇷 Engie (ENGI11)": "ENGI11.SA",
+    "🇧🇷 Equatorial (EQTL3)": "EQTL3.SA",
+    "🇧🇷 Sabesp (SBSP3)": "SBSP3.SA",
+    "🇧🇷 Prio (PRIO3)": "PRIO3.SA",
+    "🇧🇷 Brava Energia (BRAV3)": "BRAV3.SA",
+    "🇧🇷 Localiza (RENT3)": "RENT3.SA",
+    "🇧🇷 Rumo (RAIL3)": "RAIL3.SA",
+    "🇧🇷 Azul (AZUL4)": "AZUL4.SA",
+    "🇧🇷 Embraer (EMBR3)": "EMBR3.SA",
+    "🇧🇷 Magazine Luiza (MGLU3)": "MGLU3.SA",
+    "🇧🇷 Lojas Renner (LREN3)": "LREN3.SA",
+    "🇧🇷 Raia Drogasil (RADL3)": "RADL3.SA",
+    "🇧🇷 Vibra (VBBR3)": "VBBR3.SA",
+    "🇧🇷 Ultrapar (UGPA3)": "UGPA3.SA",
+    "🇧🇷 Hapvida (HAPV3)": "HAPV3.SA",
+    "🇧🇷 Rede D'Or (RDOR3)": "RDOR3.SA",
+    "🇧🇷 Telefônica/Vivo (VIVT3)": "VIVT3.SA",
+    "🇧🇷 TIM (TIMS3)": "TIMS3.SA",
+    "🇧🇷 Totvs (TOTS3)": "TOTS3.SA",
+    "🇧🇷 Nubank (ROXO34/NU)": "NU",
+    "🇧🇷 XP Inc (XP)": "XP",
+
+    # --- ₿ CRIPTO & MOEDAS ---
+    "₿ Bitcoin (USD)": "BTC-USD",
+    "₿ Ethereum (USD)": "ETH-USD",
+    "₿ Solana (USD)": "SOL-USD",
+    "💵 Dólar (USD/BRL)": "BRL=X",
+    "💶 Euro (EUR/BRL)": "EURBRL=X",
+
+    # --- 🌍 GLOBAL & COMMODITIES ---
+    "🟡 Ouro (Gold Futures)": "GC=F",
+    "⚪ Prata (Silver Futures)": "SI=F",
+    "🛢️ Petróleo WTI": "CL=F",
+    "🛢️ Petróleo Brent": "BZ=F",
+    "🌏 TSMC (Taiwan)": "TSM",
+    "🌏 Alibaba (China)": "BABA",
+    "🌏 Tencent (China)": "TCEHY",
+    "🌏 Samsung (Coreia)": "SSNLF",
+    "🌏 Toyota (Japão)": "TM",
+    "🌏 Sony (Japão)": "SONY",
+    "🌏 Shell (UK)": "SHEL",
+    "🌏 AstraZeneca (UK)": "AZN",
+    "🌏 SAP (Alemanha)": "SAP",
+    "🌏 ASML (Holanda)": "ASML",
+    "🌏 LVMH (Louis Vuitton)": "LVMUY",
 }
 
 @st.cache_data(ttl=300)
@@ -336,7 +436,7 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER DE LUXO (FINAL DA PÁGINA) ---
+# --- FOOTER DE LUXO (FINAL DA PÁGINA - CORRIGIDO) ---
 st.markdown("""
 <div class="footer-container">
     <div class="footer-small-text">Designed & Developed by</div>
