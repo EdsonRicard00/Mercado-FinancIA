@@ -13,18 +13,18 @@ st.set_page_config(layout="wide", page_title="BolsaValorIAS", page_icon="🏛️
 # --- 2. CSS HÍBRIDO (Header Luxo + Dashboard Dark Tech) ---
 st.markdown("""
 <style>
-    /* IMPORTANDO FONTES: Cinzel (Logo), Playfair (Títulos), Inter (Dados) */
+    /* IMPORTANDO FONTES */
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600;700&display=swap');
 
     /* RESET GERAL DARK */
     .stApp {
-        background-color: #050505; /* Preto Profundo */
+        background-color: #050505;
         background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 80%);
         color: #e0e0e0;
         font-family: 'Inter', sans-serif;
     }
 
-    /* --- O HEADER BOLSAVALORIAS (A Joia) --- */
+    /* --- O HEADER BOLSAVALORIAS --- */
     .logo-box {
         background: linear-gradient(120deg, #ffffff 0%, #f0f0f0 30%, #e6e6e6 50%, #fbf5b7 85%, #d4af37 100%);
         border: 2px solid #ffffff;
@@ -37,7 +37,6 @@ st.markdown("""
         overflow: hidden;
     }
     
-    /* Efeito de brilho */
     .logo-box::before {
         content: ''; position: absolute; top: 0; left: -50%; width: 100%; height: 100%;
         background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
@@ -55,7 +54,7 @@ st.markdown("""
     }
     .logo-sub-detail { font-size: 14px; color: #777; margin-top: 5px; font-style: italic; }
 
-    /* --- TICKERS DO TOPO (Mini Cards) --- */
+    /* --- TICKERS DO TOPO --- */
     .top-ticker-box {
         background-color: rgba(20, 20, 20, 0.6);
         border-radius: 12px;
@@ -70,21 +69,15 @@ st.markdown("""
     .up { color: #00ff88; }
     .down { color: #ff3b30; }
 
-    /* --- CARDS DASHBOARD (O Corpo Tecnológico) --- */
+    /* --- CARDS DASHBOARD --- */
     .dash-card {
-        background-color: #0e0e0e; /* Cinza Quase Preto */
-        border: 1px solid #1f1f1f;
-        border-radius: 16px;
-        padding: 24px;
-        height: 100%;
-        transition: transform 0.2s;
+        background-color: #0e0e0e; border: 1px solid #1f1f1f; border-radius: 16px; padding: 24px;
+        height: 100%; transition: transform 0.2s;
     }
     .dash-card:hover { border-color: #d4af37; transform: translateY(-2px); }
 
     /* --- CONTROLES --- */
-    .control-label {
-        font-family: 'Playfair Display', serif; color: #d4af37; font-size: 18px; margin-bottom: 10px;
-    }
+    .control-label { font-family: 'Playfair Display', serif; color: #d4af37; font-size: 18px; margin-bottom: 10px; }
     
     /* --- SENTIMENT CARD --- */
     .ai-badge {
@@ -98,12 +91,9 @@ st.markdown("""
     .news-title { color: #e0e0e0; font-size: 14px; font-weight: 500; text-decoration: none; display: block; margin-bottom: 5px; }
     .news-title:hover { color: #d4af37; }
     .news-meta { font-size: 11px; color: #555; }
-    .tag-high { background: rgba(212, 175, 55, 0.2); color: #d4af37; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
-
-    /* --- AÇÕES EM DESTAQUE (Rodapé) --- */
-    .highlight-card {
-        background: #0e0e0e; border: 1px solid #1f1f1f; padding: 15px; border-radius: 12px; text-align: center;
-    }
+    
+    /* --- AÇÕES EM DESTAQUE --- */
+    .highlight-card { background: #0e0e0e; border: 1px solid #1f1f1f; padding: 15px; border-radius: 12px; text-align: center; }
     .stockai-header { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 15px; }
     
     /* SIDEBAR & INPUTS */
@@ -113,16 +103,118 @@ st.markdown("""
     .stSlider > div > div > div > div { background-color: #d4af37 !important; }
     
     @keyframes shine { 100% { left: 125%; } }
-
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. DADOS & FUNÇÕES ---
+# --- 3. BANCO DE DADOS GIGANTE (100+ ATIVOS) ---
 ASSET_DB = {
-    "Apple Inc.": "AAPL", "Microsoft": "MSFT", "NVIDIA": "NVDA", "Tesla": "TSLA",
-    "Amazon": "AMZN", "Google": "GOOGL", "Meta": "META", "Bitcoin": "BTC-USD",
-    "Ibovespa": "^BVSP", "Petrobras": "PETR4.SA", "Vale": "VALE3.SA", "Itaú": "ITUB4.SA",
-    "Ambev": "ABEV3.SA", "Nubank": "NU", "Weg": "WEGE3.SA"
+    # --- 🇺🇸 BIG TECH & US GIANTS ---
+    "🇺🇸 Apple (AAPL)": "AAPL",
+    "🇺🇸 Microsoft (MSFT)": "MSFT",
+    "🇺🇸 NVIDIA (NVDA)": "NVDA",
+    "🇺🇸 Amazon (AMZN)": "AMZN",
+    "🇺🇸 Alphabet/Google (GOOGL)": "GOOGL",
+    "🇺🇸 Meta/Facebook (META)": "META",
+    "🇺🇸 Tesla (TSLA)": "TSLA",
+    "🇺🇸 Netflix (NFLX)": "NFLX",
+    "🇺🇸 AMD (AMD)": "AMD",
+    "🇺🇸 Intel (INTC)": "INTC",
+    "🇺🇸 Broadcom (AVGO)": "AVGO",
+    "🇺🇸 Qualcomm (QCOM)": "QCOM",
+    "🇺🇸 Adobe (ADBE)": "ADBE",
+    "🇺🇸 Salesforce (CRM)": "CRM",
+    "🇺🇸 Oracle (ORCL)": "ORCL",
+    "🇺🇸 Uber (UBER)": "UBER",
+    "🇺🇸 Airbnb (ABNB)": "ABNB",
+    "🇺🇸 Disney (DIS)": "DIS",
+    "🇺🇸 Coca-Cola (KO)": "KO",
+    "🇺🇸 PepsiCo (PEP)": "PEP",
+    "🇺🇸 McDonald's (MCD)": "MCD",
+    "🇺🇸 Starbucks (SBUX)": "SBUX",
+    "🇺🇸 Nike (NKE)": "NKE",
+    "🇺🇸 Walmart (WMT)": "WMT",
+    "🇺🇸 Costco (COST)": "COST",
+    "🇺🇸 Visa (V)": "V",
+    "🇺🇸 Mastercard (MA)": "MA",
+    "🇺🇸 JPMorgan (JPM)": "JPM",
+    "🇺🇸 Bank of America (BAC)": "BAC",
+    "🇺🇸 Goldman Sachs (GS)": "GS",
+    "🇺🇸 Exxon Mobil (XOM)": "XOM",
+    "🇺🇸 Chevron (CVX)": "CVX",
+    "🇺🇸 Pfizer (PFE)": "PFE",
+    "🇺🇸 Johnson & Johnson (JNJ)": "JNJ",
+    "🇺🇸 Eli Lilly (LLY)": "LLY",
+    "🇺🇸 Berkshire Hathaway (BRK-B)": "BRK-B",
+
+    # --- 🇧🇷 BRASIL (B3 IBOVESPA) ---
+    "🇧🇷 Petrobras PN (PETR4)": "PETR4.SA",
+    "🇧🇷 Petrobras ON (PETR3)": "PETR3.SA",
+    "🇧🇷 Vale (VALE3)": "VALE3.SA",
+    "🇧🇷 Itaú Unibanco (ITUB4)": "ITUB4.SA",
+    "🇧🇷 Bradesco PN (BBDC4)": "BBDC4.SA",
+    "🇧🇷 Bradesco ON (BBDC3)": "BBDC3.SA",
+    "🇧🇷 Banco do Brasil (BBAS3)": "BBAS3.SA",
+    "🇧🇷 Santander (SANB11)": "SANB11.SA",
+    "🇧🇷 BTG Pactual (BPAC11)": "BPAC11.SA",
+    "🇧🇷 B3 (B3SA3)": "B3SA3.SA",
+    "🇧🇷 Ambev (ABEV3)": "ABEV3.SA",
+    "🇧🇷 Weg (WEGE3)": "WEGE3.SA",
+    "🇧🇷 Suzano (SUZB3)": "SUZB3.SA",
+    "🇧🇷 Gerdau (GGBR4)": "GGBR4.SA",
+    "🇧🇷 CSN (CSNA3)": "CSNA3.SA",
+    "🇧🇷 Usiminas (USIM5)": "USIM5.SA",
+    "🇧🇷 JBS (JBSS3)": "JBSS3.SA",
+    "🇧🇷 Marfrig (MRFG3)": "MRFG3.SA",
+    "🇧🇷 BRF (BRFS3)": "BRFS3.SA",
+    "🇧🇷 Eletrobras (ELET3)": "ELET3.SA",
+    "🇧🇷 Eletrobras PN (ELET6)": "ELET6.SA",
+    "🇧🇷 Copel (CPLE6)": "CPLE6.SA",
+    "🇧🇷 Cemig (CMIG4)": "CMIG4.SA",
+    "🇧🇷 Engie (ENGI11)": "ENGI11.SA",
+    "🇧🇷 Equatorial (EQTL3)": "EQTL3.SA",
+    "🇧🇷 Sabesp (SBSP3)": "SBSP3.SA",
+    "🇧🇷 Prio (PRIO3)": "PRIO3.SA",
+    "🇧🇷 Brava Energia (BRAV3)": "BRAV3.SA",
+    "🇧🇷 Localiza (RENT3)": "RENT3.SA",
+    "🇧🇷 Rumo (RAIL3)": "RAIL3.SA",
+    "🇧🇷 Azul (AZUL4)": "AZUL4.SA",
+    "🇧🇷 Embraer (EMBR3)": "EMBR3.SA",
+    "🇧🇷 Magazine Luiza (MGLU3)": "MGLU3.SA",
+    "🇧🇷 Lojas Renner (LREN3)": "LREN3.SA",
+    "🇧🇷 Raia Drogasil (RADL3)": "RADL3.SA",
+    "🇧🇷 Vibra (VBBR3)": "VBBR3.SA",
+    "🇧🇷 Ultrapar (UGPA3)": "UGPA3.SA",
+    "🇧🇷 Hapvida (HAPV3)": "HAPV3.SA",
+    "🇧🇷 Rede D'Or (RDOR3)": "RDOR3.SA",
+    "🇧🇷 Telefônica/Vivo (VIVT3)": "VIVT3.SA",
+    "🇧🇷 TIM (TIMS3)": "TIMS3.SA",
+    "🇧🇷 Totvs (TOTS3)": "TOTS3.SA",
+    "🇧🇷 Nubank (ROXO34/NU)": "NU",
+    "🇧🇷 XP Inc (XP)": "XP",
+
+    # --- ₿ CRIPTO & MOEDAS ---
+    "₿ Bitcoin (USD)": "BTC-USD",
+    "₿ Ethereum (USD)": "ETH-USD",
+    "₿ Solana (USD)": "SOL-USD",
+    "💵 Dólar (USD/BRL)": "BRL=X",
+    "💶 Euro (EUR/BRL)": "EURBRL=X",
+
+    # --- 🌍 GLOBAL & COMMODITIES ---
+    "🟡 Ouro (Gold Futures)": "GC=F",
+    "⚪ Prata (Silver Futures)": "SI=F",
+    "🛢️ Petróleo WTI": "CL=F",
+    "🛢️ Petróleo Brent": "BZ=F",
+    "🌏 TSMC (Taiwan)": "TSM",
+    "🌏 Alibaba (China)": "BABA",
+    "🌏 Tencent (China)": "TCEHY",
+    "🌏 Samsung (Coreia)": "SSNLF",
+    "🌏 Toyota (Japão)": "TM",
+    "🌏 Sony (Japão)": "SONY",
+    "🌏 Shell (UK)": "SHEL",
+    "🌏 AstraZeneca (UK)": "AZN",
+    "🌏 SAP (Alemanha)": "SAP",
+    "🌏 ASML (Holanda)": "ASML",
+    "🌏 LVMH (Louis Vuitton)": "LVMUY",
 }
 
 @st.cache_data(ttl=300)
@@ -146,13 +238,15 @@ def get_asset_history(ticker, period):
 def get_news(term):
     try:
         googlenews = GoogleNews(period='3d', lang='en') 
-        googlenews.search(f"{term} finance")
+        # Limpa o termo de pesquisa (remove emojis e tickers)
+        clean_term = term.split("(")[0].replace("🇺🇸", "").replace("🇧🇷", "").replace("₿", "").strip()
+        googlenews.search(f"{clean_term} market news")
         return googlenews.result()
     except: return []
 
 # --- 4. LAYOUT DA PÁGINA ---
 
-# === HEADER BOLSAVALORIAS (RESTAURADO) ===
+# === HEADER BOLSAVALORIAS ===
 st.markdown("""
 <div class="logo-box">
     <div class="logo-text">
@@ -166,7 +260,6 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-# ==========================================
 
 # TOP SUMMARY (MERCADOS GLOBAIS)
 top_tickers = ["^GSPC", "^IXIC", "^DJI", "BTC-USD", "BRL=X"]
@@ -195,12 +288,14 @@ if top_data is not None and not top_data.empty:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# --- GRID PRINCIPAL (Controles, Gráfico, IA) ---
+# --- GRID PRINCIPAL ---
 col_left, col_mid, col_right = st.columns([1, 2.5, 1.2])
 
 with col_left:
     st.markdown("""<div class="dash-card">""", unsafe_allow_html=True)
     st.markdown('<div class="control-label">Ativo</div>', unsafe_allow_html=True)
+    
+    # Selectbox com a lista gigante de 100 ativos
     selected_name = st.selectbox("", options=list(ASSET_DB.keys()), label_visibility="collapsed")
     ticker = ASSET_DB[selected_name]
     
@@ -218,9 +313,13 @@ with col_left:
         delta = curr - prev
         pct = (delta/prev)*100
         color = "#00ff88" if delta >= 0 else "#ff3b30"
+        
+        # Formata moeda baseado no ativo
+        currency_symbol = "R$" if ".SA" in ticker else "US$"
+        
         st.markdown(f"""
-            <div style="font-family: 'Playfair Display'; font-size: 32px; color: #fff;">{ticker}</div>
-            <div style="font-size: 24px; color: {color}; font-weight: bold;">{curr:,.2f}</div>
+            <div style="font-family: 'Playfair Display'; font-size: 28px; color: #fff; line-height: 1.2;">{selected_name.split('(')[0]}</div>
+            <div style="font-size: 24px; color: {color}; font-weight: bold; margin-top: 10px;">{currency_symbol} {curr:,.2f}</div>
             <div style="font-size: 14px; color: {color};">{delta:+.2f} ({pct:+.2f}%)</div>
         """, unsafe_allow_html=True)
 
@@ -254,13 +353,13 @@ with col_right:
         blob = [TextBlob(n['title']) for n in news[:5]]
         sentiment_score = sum([b.sentiment.polarity for b in blob]) / len(blob)
     
-    sent_label = "ALTA" if sentiment_score > 0 else "BAIXA"
-    sent_color = "#00ff88" if sentiment_score > 0 else "#ff3b30"
+    sent_label = "OTIMISTA" if sentiment_score > 0.05 else "PESSIMISTA" if sentiment_score < -0.05 else "NEUTRO"
+    sent_color = "#00ff88" if sentiment_score > 0.05 else "#ff3b30" if sentiment_score < -0.05 else "#aaaaaa"
     
     st.markdown(f"""
         <div class="ai-badge">⚡ Análise IA</div>
         <div style="font-size: 12px; color: #888;">Sentimento: {ticker}</div>
-        <div class="sentiment-score" style="color: {sent_color}">{sent_label}</div>
+        <div class="sentiment-score" style="color: {sent_color}; font-size: 28px;">{sent_label}</div>
         <div style="height: 4px; width: 100%; background: #333; margin-top: 10px; border-radius: 2px;">
             <div style="height: 100%; width: {min(abs(sentiment_score)*100 + 50, 100)}%; background: {sent_color}; border-radius: 2px;"></div>
         </div>
@@ -274,7 +373,7 @@ with col_right:
             st.markdown(f"""
             <div class="news-item">
                 <a href="{n['link']}" target="_blank" class="news-title">{n['title']}</a>
-                <span class="news-meta">{n.get('date', 'Hoje')} • Google News</span>
+                <span class="news-meta">{n.get('date', 'Recente')} • News</span>
             </div>
             """, unsafe_allow_html=True)
     else: st.write("Sem notícias.")
@@ -284,7 +383,7 @@ with col_right:
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown('<div class="stockai-header">Ações em Destaque</div>', unsafe_allow_html=True)
 
-destaque_tickers = ["AAPL", "GOOGL", "MSFT", "NVDA", "AMZN", "TSLA"]
+destaque_tickers = ["AAPL", "PETR4.SA", "VALE3.SA", "MSFT", "NVDA", "BTC-USD"]
 destaque_data = get_live_data(destaque_tickers)
 
 if destaque_data is not None:
@@ -296,10 +395,11 @@ if destaque_data is not None:
                 prev = destaque_data[t].iloc[-2]
                 pct = ((curr-prev)/prev)*100
                 color = "#00ff88" if pct >= 0 else "#ff3b30"
+                name_clean = t.replace(".SA", "")
                 
                 st.markdown(f"""
                 <div class="highlight-card">
-                    <div style="font-weight:700; color:#fff;">{t}</div>
+                    <div style="font-weight:700; color:#fff;">{name_clean}</div>
                     <div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div>
                     <div style="font-size:12px; color:{color};">{pct:+.2f}%</div>
                 </div>
