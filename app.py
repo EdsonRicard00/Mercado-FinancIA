@@ -9,7 +9,7 @@ import numpy as np
 # --- 1. CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(layout="wide", page_title="BolsaValorIAS", page_icon="🏛️")
 
-# --- 2. CSS PREMIUM (HOVER DOURADO & FOOTER DE LUXO) ---
+# --- 2. CSS PREMIUM (DESIGN DE LUXO) ---
 st.markdown("""
 <style>
     /* IMPORTANDO FONTES */
@@ -436,7 +436,8 @@ if destaque_data is not None:
                 st.markdown(f"""<div class="highlight-card"><div style="font-weight:700; color:#fff;">{name_clean}</div><div style="margin-top:10px; font-size:16px; color:#fff; font-weight:600;">{curr:.2f}</div><div style="font-size:12px; color:{color};">{pct:+.2f}%</div></div>""", unsafe_allow_html=True)
             except: pass
 
-# --- FOOTER DE LUXO (FINAL DA PÁGINA) ---
+# --- FOOTER DE LUXO (CORRIGIDO) ---
+# AQUI ESTAVA O ERRO! AGORA ESTÁ CERTO COM 'unsafe_allow_html=True'
 st.markdown("""
 <div class="footer-container">
     <div class="footer-small-text">Designed & Developed by</div>
